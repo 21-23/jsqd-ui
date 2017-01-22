@@ -1,0 +1,19 @@
+@import './color-palette.styl'
+
+rounded-icon-button()
+    color secondary-action-color
+    border 2px solid secondary-action-border-color
+    text-decoration none
+    border-radius 1em
+    padding 0.1em 0.8em
+
+    &:after, &:before
+        font-family AwesomeIcon
+
+    &:after
+        margin-left 5px
+    &:before
+        margin-right 5px
+
+    &:hover
+        background secondary-action-background-color

@@ -1,0 +1,35 @@
+@import '~common/fonts/families.styl'
+@import '~common/styles/color-palette.styl'
+@import '~common/styles/common.styl'
+
+.user-panel
+    display flex
+    justify-content space-between
+    align-items center
+    color holy-white
+    background url('./header-opacity-lodash.png') repeat-x
+    background-size auto 100%
+    padding 0 2vw
+    box-sizing border-box
+    border-bottom 1px solid super-light-blue
+    color holy-white
+
+    .logo
+        flex-grow 1
+
+    .user-info
+        flex-grow 6
+        text-align right
+        margin-right 20px
+
+        .user-info-logo
+            font-family AwesomeIcon
+            padding-right 5px
+
+    .log-out
+        rounded-icon-button()
+        text-align right
+
+        &:after
+            content '\f08b'
+            font-size 80%

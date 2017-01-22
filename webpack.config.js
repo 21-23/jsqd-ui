@@ -52,6 +52,15 @@ module.exports = {
                     'file-loader',
                 ]
             },
+            {
+                test: /\.png?$/,
+                include: [
+                    path.resolve(__dirname, 'ui-app'),
+                ],
+                use: [
+                    'file-loader?name=[name].[ext]',
+                ]
+            }
         ]
     },
     resolve: {
