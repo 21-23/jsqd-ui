@@ -1,6 +1,7 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -17,6 +18,11 @@ module.exports = {
     devtool: debug ? 'source-map' : false,
     module: {
         rules: [
+            {
+                enforce: 'pre',
+                test: /\.styl?$/,
+                loader: 'stylint-loader'
+            },
             {
                 test: /\.js?$/,
                 include: [
@@ -60,7 +66,7 @@ module.exports = {
                 use: [
                     'file-loader?name=[name].[ext]',
                 ]
-            }
+            },
         ]
     },
     resolve: {
@@ -69,6 +75,7 @@ module.exports = {
         }
     },
     plugins: [
+        new WebpackNotifierPlugin(),
         new HtmlWebpackPlugin({
             filename: 'login.html',
             template: 'ui-app/login/login.html',

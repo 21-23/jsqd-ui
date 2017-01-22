@@ -6,7 +6,7 @@ import './game-styles.styl';
 import UserPanel from 'common/components/user-panel/user-panel';
 
 render((
-    <div className="login-view">
+    <div className="game-view">
         <UserPanel userName="Player" />
     </div>
 ), document.body);
