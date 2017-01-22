@@ -7,12 +7,12 @@ const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     entry: {
-        'login': './ui-app/login/login-view.js',
-        'game': './ui-app/game/game-view.js',
-        'game-master': './ui-app/game-master/game-master-view.js',
+        'login': './app/login/login-view.js',
+        'game': './app/game/game-view.js',
+        'game-master': './app/game-master/game-master-view.js',
     },
     output: {
-        path: path.resolve(__dirname, 'ui-dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name].js'
     },
     devtool: debug ? 'source-map' : false,
@@ -26,7 +26,7 @@ module.exports = {
             {
                 test: /\.js?$/,
                 include: [
-                    path.resolve(__dirname, 'ui-app'),
+                    path.resolve(__dirname, 'app'),
                 ],
                 use: [
                     {
@@ -40,7 +40,7 @@ module.exports = {
             {
                 test: /\.styl?$/,
                 include: [
-                    path.resolve(__dirname, 'ui-app'),
+                    path.resolve(__dirname, 'app'),
                 ],
                 use: [
                     'style-loader',
@@ -52,7 +52,7 @@ module.exports = {
             {
                 test: /\.otf?$/,
                 include: [
-                    path.resolve(__dirname, 'ui-app'),
+                    path.resolve(__dirname, 'app'),
                 ],
                 use: [
                     'file-loader',
@@ -61,7 +61,7 @@ module.exports = {
             {
                 test: /\.png?$/,
                 include: [
-                    path.resolve(__dirname, 'ui-app'),
+                    path.resolve(__dirname, 'app'),
                 ],
                 use: [
                     'file-loader?name=[name].[ext]',
@@ -71,29 +71,29 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'common': path.resolve(__dirname, 'ui-app/common'),
+            'common': path.resolve(__dirname, 'app/common'),
         }
     },
     plugins: [
         new WebpackNotifierPlugin(),
         new HtmlWebpackPlugin({
             filename: 'login.html',
-            template: 'ui-app/login/login.html',
+            template: 'app/login/login.html',
             chunks: ['login']
         }),
         new HtmlWebpackPlugin({
             filename: 'game.html',
-            template: 'ui-app/game/game.html',
+            template: 'app/game/game.html',
             chunks: ['game']
         }),
         new HtmlWebpackPlugin({
             filename: 'game-master.html',
-            template: 'ui-app/game-master/game-master.html',
+            template: 'app/game-master/game-master.html',
             chunks: ['game-master']
         }),
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'ui-dist'),
+        contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: 8082,
         host: '0.0.0.0'
