@@ -1,0 +1,33 @@
+{
+  "name": "UI-trash",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "ui-server": "cross-env NODE_ENV=development webpack-dev-server",
+    "ui-build": "cross-env NODE_ENV=development webpack",
+    "ui-watch": "cross-env NODE_ENV=development webpack --watch"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-react-jsx": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.26.0",
+    "resolve-url-loader": "^1.6.1",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "preact": "^7.1.0"
+  }
+}
