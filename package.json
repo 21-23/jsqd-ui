@@ -1,12 +1,13 @@
 {
   "name": "UI-trash",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "app/index.js",
   "license": "MIT",
   "scripts": {
     "ui-server": "cross-env NODE_ENV=development webpack-dev-server",
     "ui-build": "cross-env NODE_ENV=development webpack",
-    "ui-watch": "cross-env NODE_ENV=development webpack --watch"
+    "ui-watch": "cross-env NODE_ENV=development webpack --watch",
+    "start": "cross-env NODE_ENV=development node app/index.js"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
@@ -33,6 +34,7 @@
     "webpack-notifier": "^1.5.0"
   },
   "dependencies": {
+    "express": "^4.14.0",
     "preact": "^7.1.0"
   }
 }
