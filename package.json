@@ -6,7 +6,9 @@
   "scripts": {
     "ui-server": "cross-env NODE_ENV=development webpack-dev-server",
     "ui-build": "cross-env NODE_ENV=development webpack",
-    "ui-watch": "cross-env NODE_ENV=development webpack --watch"
+    "ui-watch": "cross-env NODE_ENV=development webpack --watch",
+    "lint": "eslint ./app && stylint ./app",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
@@ -16,12 +18,10 @@
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "eslint": "^3.14.0",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
+    "husky": "^0.13.0",
+    "lint-staged": "^3.2.7",
     "resolve-url-loader": "^1.6.1",
     "style-loader": "^0.13.1",
     "stylint": "^1.5.9",
