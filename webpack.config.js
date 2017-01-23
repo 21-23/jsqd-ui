@@ -38,6 +38,13 @@ module.exports = {
                 ]
             },
             {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ]
+            },
+            {
                 test: /\.styl?$/,
                 include: [
                     path.resolve(__dirname, 'app'),
