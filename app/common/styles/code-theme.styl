@@ -3,65 +3,65 @@
 .cm-s-monokai
     &.CodeMirror
         background none
-        color dirty-white
+        color line-number
     div
         &.CodeMirror-selected
             background selection
     .CodeMirror-gutters
-        background dark-background
+        background theme-background
         border-radius 3px
         border-right 0
     .CodeMirror-guttermarker
-        color white
+        color guttermarker-color
     .CodeMirror-guttermarker-subtle
         color line-number
     .CodeMirror-linenumber
         color line-number
     .CodeMirror-cursor
-        border-left 1px solid dirty-white
+        border-left 1px solid cursor-color
     span
         &.cm-comment
-            color #75715e
+            color comment-color
         &.cm-atom
-            color #ae81ff
+            color atom
         &.cm-number
-            color #ae81ff
+            color atom
         &.cm-keyword
-            color #f92672
+            color keyword
         &.cm-builtin
-            color #66d9ef
+            color builtin
         &.cm-string
-            color #e6db74
+            color string
         &.cm-variable
             color dirty-white
         &.cm-variable-2
-            color #9effff
+            color variable
         &.cm-variable-3
-            color #66d9ef
+            color builtin
         &.cm-def
-            color #fd971f
+            color variable
         &.cm-bracket
             color dirty-white
         &.cm-tag
-            color #f92672
+            color keyword
         &.cm-header
-            color #ae81ff
+            color atom
         &.cm-link
-            color #ae81ff
+            color atom
         &.cm-error
-            background #f92672
-            color #f8f8f0
+            background keyword
+            color cursor-color
     .CodeMirror-activeline-background
-        background #373831
+        background alternative-background
     .CodeMirror-matchingbracket
         text-decoration underline
         color white !important // @stylint ignore
 
 .cm-s-monokai .CodeMirror-line::selection, .cm-s-monokai .CodeMirror-line > span::selection, .cm-s-monokai .CodeMirror-line > span > span::selection
-    background rgba(73, 72, 62, .99)
+    background line
 
 .cm-s-monokai .CodeMirror-line::-moz-selection, .cm-s-monokai .CodeMirror-line > span::-moz-selection, .cm-s-monokai .CodeMirror-line > span > span::-moz-selection
-    background rgba(73, 72, 62, .99)
+    background line
 
 .cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute
-    color #a6e22e
+    color property
