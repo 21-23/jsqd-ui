@@ -4,6 +4,7 @@ import 'common/styles/reset.styl';
 import './game-styles.styl';
 
 import UserPanel from 'common/components/user-panel/user-panel';
+import Editor from './components/editor/editor';
 import Code from 'common/components/code/code';
 
 //DATA FOR TEST
@@ -21,6 +22,6 @@ render((
             <Code value={JSON.stringify(CONTENT)}/>
             <Code value={Code.toString()}/>
         </div>
-
+        <Editor/>
     </div>
 ), document.body);

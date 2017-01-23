@@ -1,0 +1,16 @@
+@import '~common/styles/code-colors.styl'
+
+//TODO: move lines calculations to shared place
+number-of-lines = 10
+font-size = 14px
+code-mirror-height = number-of-lines * font-size
+
+.code-editor
+    flex-basis auto
+    flex-grow 1
+    padding 5px
+    background theme-background
+    .CodeMirror
+        height code-mirror-height
+
+//TODO: styles for scrollbar?
