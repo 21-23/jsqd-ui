@@ -1,10 +1,10 @@
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
-import './code.styl';
-
 import { h, Component } from 'preact';
 import CodeMirror from 'codemirror';
 import Beautifier from 'js-beautify';
+
+import 'codemirror/lib/codemirror.css';
+import 'common/styles/code-theme.styl';
+import './code.styl';
 
 //imports specific language mode for editor
 import 'codemirror/mode/javascript/javascript';
@@ -18,6 +18,8 @@ export default class Code extends Component {
             lint: true,
             indentUnit: 4,
             readOnly: true,
+            lineNumbers: true,
+            theme: 'monokai',
         };
         Object.assign(config, this.props.config);
 
@@ -45,9 +47,11 @@ export default class Code extends Component {
 
     render() {
         return (
-            <div className="codemirror-code">
-                { /* preact doesn't support refs */}
-                <textarea readOnly ref={ component => this.textarea = component }/>
+            <div className="codemirror-wrapper">
+                <div className="codemirror-code">
+                    { /* preact doesn't support refs */}
+                    <textarea readOnly ref={ component => this.textarea = component }/>
+                </div>
             </div>
         );
     }
