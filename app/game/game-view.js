@@ -4,7 +4,7 @@ import 'common/styles/reset.styl';
 import './game-styles.styl';
 
 import UserPanel from 'common/components/user-panel/user-panel';
-import Editor from './components/editor/editor';
+import CodeInput from './components/code-input/code-input';
 import Code from 'common/components/code/code';
 
 //DATA FOR TEST
@@ -22,6 +22,6 @@ render((
             <Code value={JSON.stringify(CONTENT)}/>
             <Code value={Code.toString()}/>
         </div>
-        <Editor/>
+        <CodeInput/>
     </div>
 ), document.body);

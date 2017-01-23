@@ -6,7 +6,7 @@ import 'codemirror/lib/codemirror.css';
 import 'common/styles/code-theme.styl';
 import './code.styl';
 
-//imports specific language mode for editor
+//imports specific language mode for code-input
 import 'codemirror/mode/javascript/javascript';
 
 export default class Code extends Component {
@@ -23,7 +23,7 @@ export default class Code extends Component {
         };
         Object.assign(config, this.props.config);
 
-        this.codeBlock = CodeMirror.fromTextArea(this.textarea, config);
+        this.code = CodeMirror.fromTextArea(this.textarea, config);
         this.setCode(this.props.value);
     }
 
@@ -38,16 +38,16 @@ export default class Code extends Component {
     }
 
     get value() {
-        return this.codeBlock.getValue();
+        return this.code.getValue();
     }
 
     set value(value) {
-        this.codeBlock.getDoc().setValue(value);
+        this.code.getDoc().setValue(value);
     }
 
     render() {
         return (
-            <div className="code-box">
+            <div className="code">
                 { /* preact doesn't support refs */}
                 <textarea readOnly ref={ component => this.textarea = component }/>
             </div>

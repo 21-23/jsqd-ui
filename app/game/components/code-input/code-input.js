@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import CodeMirror from 'codemirror';
 import { isNewLineEvent, isValidSymbol } from './helpers';
 
-//imports specific language mode for editor
+//imports specific language mode for code-input
 import 'codemirror/mode/javascript/javascript';
 //imports addons for hinting/autocomplete
 import 'codemirror/addon/hint/javascript-hint';
@@ -11,10 +11,10 @@ import 'codemirror/addon/hint/show-hint';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/addon/hint/show-hint.css';
 import 'common/styles/code-theme.styl';
-import './editor.styl';
+import './code-input.styl';
 
 //TODO: Fix autocomplete issues
-export default class Editor extends Component {
+export default class CodeInput extends Component {
     componentDidMount() {
         const config = {
             mode: 'javascript',
@@ -26,11 +26,11 @@ export default class Editor extends Component {
             theme: 'monokai',
         };
         Object.assign(config, this.props.config);
-        this.editor = CodeMirror.fromTextArea(this.textarea, config);
+        this.codeInput = CodeMirror.fromTextArea(this.textarea, config);
 
         // beta autocomplete. off by default
         if (this.props.enableAutocomplete) {
-            this.editor.on('change', this.onChange.bind(this));
+            this.codeInput.on('change', this.onChange.bind(this));
         }
     }
 
@@ -42,7 +42,7 @@ export default class Editor extends Component {
 
     componentWillUnmount() {
         if (this.props.enableAutocomplete) {
-            this.editor.off('change', this.onChange.bind(this));
+            this.codeInput.off('change', this.onChange.bind(this));
         }
     }
 
@@ -61,16 +61,16 @@ export default class Editor extends Component {
     }
 
     get value() {
-        return this.editor.getValue();
+        return this.codeInput.getValue();
     }
 
     set value(value) {
-        this.editor.getDoc().setValue(value);
+        this.codeInput.getDoc().setValue(value);
     }
 
     render() {
         return (
-            <div className="code-editor">
+            <div className="code-input">
                 { /* preact doesn't support refs */}
                 <textarea ref={ component => this.textarea = component } value={this.props.value} readOnly/>
             </div>
