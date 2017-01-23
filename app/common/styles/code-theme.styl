@@ -2,22 +2,23 @@
 
 .cm-s-monokai
     &.CodeMirror
-        background dark-background
-        color #f8f8f2
+        background none
+        color dirty-white
     div
         &.CodeMirror-selected
-            background #49483E
+            background selection
     .CodeMirror-gutters
-        background #272822
+        background dark-background
+        border-radius 3px
         border-right 0
     .CodeMirror-guttermarker
         color white
     .CodeMirror-guttermarker-subtle
-        color #d0d0d0
+        color line-number
     .CodeMirror-linenumber
-        color #d0d0d0
+        color line-number
     .CodeMirror-cursor
-        border-left 1px solid #f8f8f0
+        border-left 1px solid dirty-white
     span
         &.cm-comment
             color #75715e
@@ -32,7 +33,7 @@
         &.cm-string
             color #e6db74
         &.cm-variable
-            color #f8f8f2
+            color dirty-white
         &.cm-variable-2
             color #9effff
         &.cm-variable-3
@@ -40,7 +41,7 @@
         &.cm-def
             color #fd971f
         &.cm-bracket
-            color #f8f8f2
+            color dirty-white
         &.cm-tag
             color #f92672
         &.cm-header

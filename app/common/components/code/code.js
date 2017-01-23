@@ -18,7 +18,7 @@ export default class Code extends Component {
             lint: true,
             indentUnit: 4,
             readOnly: true,
-            lineNumbers: true,
+            lineNumbers: false,
             theme: 'monokai',
         };
         Object.assign(config, this.props.config);
@@ -47,11 +47,9 @@ export default class Code extends Component {
 
     render() {
         return (
-            <div className="codemirror-wrapper">
-                <div className="codemirror-code">
-                    { /* preact doesn't support refs */}
-                    <textarea readOnly ref={ component => this.textarea = component }/>
-                </div>
+            <div className="code-box">
+                { /* preact doesn't support refs */}
+                <textarea readOnly ref={ component => this.textarea = component }/>
             </div>
         );
     }

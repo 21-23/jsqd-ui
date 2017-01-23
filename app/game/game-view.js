@@ -17,6 +17,10 @@ const CONTENT = [
 render((
     <div className="game-view">
         <UserPanel userName="Player" />
-        <Code value={JSON.stringify(CONTENT)}/>
+        <div className='flex-justify-center'>
+            <Code value={JSON.stringify(CONTENT)}/>
+            <Code value={Code.toString()}/>
+        </div>
+
     </div>
 ), document.body);

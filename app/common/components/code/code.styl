@@ -1,20 +1,15 @@
 @import '~common/styles/code-colors.styl'
 
-number-of-lines = 10
+number-of-lines = 20
 font-size = 14px
 code-mirror-height = number-of-lines * font-size
 
-.codemirror-wrapper
-    display flex
-    justify-content center
-
-.codemirror-code
-    min-width 400px
-    margin 20px
+.code-box
     flex-basis auto
     flex-grow 1
     padding 5px
     background dark-background
+    border-radius 10px
     /* code block is editor but with hidden cursor and readonly */
     .CodeMirror-cursors
         display none !important  // @stylint ignore
