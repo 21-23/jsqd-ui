@@ -1,12 +1,17 @@
 import { h, render } from 'preact';
+import { Provider } from 'preact-redux';
 
 import 'common/styles/reset.styl';
 import './game-styles.styl';
 
-import UserPanel from 'common/components/user-panel/user-panel';
+import GameApp from './components/GameApp';
+
+import store from './store/store';
 
 render((
     <div className="game-view">
-        <UserPanel userName="Player" />
+        <Provider store={store}>
+            <GameApp />
+        </Provider>
     </div>
 ), document.body);
