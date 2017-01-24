@@ -44,6 +44,7 @@ export default class CodeEditor extends Component {
         if (this.props.enableAutocomplete) {
             this.codeEditor.off('change', this.onChange.bind(this));
         }
+        this.codeEditor = null;
     }
 
     onChange(editor, event) {
