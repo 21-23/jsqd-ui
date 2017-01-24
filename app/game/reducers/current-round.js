@@ -1,11 +1,12 @@
 import { connect } from 'preact-redux';
 
 const defaultState = {
-    displayName: 'Player',
-    iconCharCode: '\uf007',
+    name: 'Current round',
+    duration: 120,
+    remaining: 95
 };
 
-export default function userPanel(state = defaultState, action) {
+export default function currentRound(state = defaultState, action) {
     switch(action.type) {
         default:
             return state;
