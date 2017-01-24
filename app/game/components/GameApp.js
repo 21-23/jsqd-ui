@@ -18,11 +18,16 @@ class GameApp extends Component {
         return (
             <div>
                 <UserPanel {...userPanel} />
-                <div className='flex-justify-center'>
-                    <CodeBox value={JSON.stringify(CONTENT)}/>
-                    <CodeBox value={CodeEditor.toString()}/>
+                <div>
+                    <div className="puzzle">
+                        <CodeBox value={Component.toString()}/>
+                        <CodeBox value={JSON.stringify([1, 2, 3, 4, 5])}/>
+                    </div>
+                    <div className="editor">
+                        <CodeEditor/>
+                        <CodeBox value={JSON.stringify(CONTENT)}/>
+                    </div>
                 </div>
-                <CodeEditor/>
             </div>
         );
     }

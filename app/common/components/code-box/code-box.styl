@@ -1,10 +1,5 @@
 @import '~common/styles/code-colors.styl'
 
-//TODO: move lines calculations to shared place
-number-of-lines = 20
-font-size = 14px
-code-mirror-height = number-of-lines * font-size
-
 .code-box
     padding 5px
     background theme-background
@@ -12,7 +7,7 @@ code-mirror-height = number-of-lines * font-size
     /* code-box block is codeEditor but with hidden cursor and readonly */
     .CodeMirror-cursors
         display none !important  // @stylint ignore
-    .CodeMirror
-        height code-mirror-height
+    //.CodeMirror
+    //    height code-mirror-height
 
 //TODO: styles for scrollbar?

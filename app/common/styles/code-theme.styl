@@ -1,6 +1,8 @@
 @import 'code-colors.styl'
 
 .cm-s-lodash
+    &.CodeMirror pre
+        padding 2px 4px
     &.CodeMirror
         background none
         color line-number
@@ -56,7 +58,6 @@
     .CodeMirror-matchingbracket
         text-decoration underline
         color white !important // @stylint ignore
-
 .cm-s-lodash .CodeMirror-line::selection, .cm-s-lodash .CodeMirror-line > span::selection, .cm-s-lodash .CodeMirror-line > span > span::selection
     background line
 

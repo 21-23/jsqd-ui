@@ -12,13 +12,21 @@ html
         width 100%
         height 5vh
 
-    .code-box
-        min-width 300px
+    .code-box, .code-editor
         margin 5px
 
-    .code-editor
-        margin 5px
-
-    .flex-justify-center
+    .puzzle, .editor
         display flex
         justify-content center
+
+        & div:nth-child(1)
+            width 60%
+
+            .CodeMirror
+                width 100%
+
+        & div:nth-child(2)
+            width 30%
+
+            .CodeMirror
+                width 100%
