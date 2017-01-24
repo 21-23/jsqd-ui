@@ -19,7 +19,7 @@ export default class CodeBox extends Component {
             indentUnit: 4,
             readOnly: true,
             lineNumbers: false,
-            theme: 'monokai',
+            theme: 'lodash',
         };
         Object.assign(config, this.props.config);
 

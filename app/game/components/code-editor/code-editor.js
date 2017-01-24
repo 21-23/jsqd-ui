@@ -23,7 +23,7 @@ export default class CodeEditor extends Component {
             autofocus: true,
             lint: true,
             indentUnit: 4,
-            theme: 'monokai',
+            theme: 'lodash',
         };
         Object.assign(config, this.props.config);
         this.codeEditor = CodeMirror.fromTextArea(this.textarea, config);

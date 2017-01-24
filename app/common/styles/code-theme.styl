@@ -1,6 +1,6 @@
 @import 'code-colors.styl'
 
-.cm-s-monokai
+.cm-s-lodash
     &.CodeMirror
         background none
         color line-number
@@ -25,7 +25,7 @@
         &.cm-atom
             color atom
         &.cm-number
-            color atom
+            color number
         &.cm-keyword
             color keyword
         &.cm-builtin
@@ -33,15 +33,15 @@
         &.cm-string
             color string
         &.cm-variable
-            color dirty-white
+            color atom
         &.cm-variable-2
             color variable
         &.cm-variable-3
             color builtin
         &.cm-def
-            color variable
+            color def
         &.cm-bracket
-            color dirty-white
+            color atom
         &.cm-tag
             color keyword
         &.cm-header
@@ -57,11 +57,11 @@
         text-decoration underline
         color white !important // @stylint ignore
 
-.cm-s-monokai .CodeMirror-line::selection, .cm-s-monokai .CodeMirror-line > span::selection, .cm-s-monokai .CodeMirror-line > span > span::selection
+.cm-s-lodash .CodeMirror-line::selection, .cm-s-lodash .CodeMirror-line > span::selection, .cm-s-lodash .CodeMirror-line > span > span::selection
     background line
 
-.cm-s-monokai .CodeMirror-line::-moz-selection, .cm-s-monokai .CodeMirror-line > span::-moz-selection, .cm-s-monokai .CodeMirror-line > span > span::-moz-selection
+.cm-s-lodash .CodeMirror-line::-moz-selection, .cm-s-lodash .CodeMirror-line > span::-moz-selection, .cm-s-lodash .CodeMirror-line > span > span::-moz-selection
     background line
 
-.cm-s-monokai span.cm-property, .cm-s-monokai span.cm-attribute
+.cm-s-lodash span.cm-property, .cm-s-lodash span.cm-attribute
     color property
