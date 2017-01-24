@@ -1,0 +1,68 @@
+@import 'code-colors.styl'
+
+.cm-s-lodash
+    &.CodeMirror pre
+        padding 2px 4px
+    &.CodeMirror
+        background none
+        color line-number
+    div
+        &.CodeMirror-selected
+            background selection
+    .CodeMirror-gutters
+        background theme-background
+        border-radius 3px
+        border-right 0
+    .CodeMirror-guttermarker
+        color guttermarker
+    .CodeMirror-guttermarker-subtle
+        color line-number
+    .CodeMirror-linenumber
+        color line-number
+    .CodeMirror-cursor
+        border-left 1px solid cursor
+    span
+        &.cm-comment
+            color comment
+        &.cm-atom
+            color atom
+        &.cm-number
+            color number
+        &.cm-keyword
+            color keyword
+        &.cm-builtin
+            color builtin
+        &.cm-string
+            color string
+        &.cm-variable
+            color atom
+        &.cm-variable-2
+            color variable
+        &.cm-variable-3
+            color builtin
+        &.cm-def
+            color def
+        &.cm-bracket
+            color atom
+        &.cm-tag
+            color keyword
+        &.cm-header
+            color atom
+        &.cm-link
+            color atom
+        &.cm-error
+            background keyword
+            color cursor
+    .CodeMirror-activeline-background
+        background alternative-background
+    .CodeMirror-matchingbracket
+        text-decoration underline
+        color white !important // @stylint ignore
+.cm-s-lodash .CodeMirror-line::selection, .cm-s-lodash .CodeMirror-line > span::selection, .cm-s-lodash .CodeMirror-line > span > span::selection
+    background line
+
+.cm-s-lodash .CodeMirror-line::-moz-selection, .cm-s-lodash .CodeMirror-line > span::-moz-selection, .cm-s-lodash .CodeMirror-line > span > span::-moz-selection
+    background line
+
+.cm-s-lodash span.cm-property, .cm-s-lodash span.cm-attribute
+    color property
