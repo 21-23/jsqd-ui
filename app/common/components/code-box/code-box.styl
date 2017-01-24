@@ -5,12 +5,11 @@ number-of-lines = 20
 font-size = 14px
 code-mirror-height = number-of-lines * font-size
 
-.code
-    flex-grow 1
+.code-box
     padding 5px
     background theme-background
-    border-radius 10px
-    /* code block is code-input but with hidden cursor and readonly */
+    border-radius 3px
+    /* code-box block is codeEditor but with hidden cursor and readonly */
     .CodeMirror-cursors
         display none !important  // @stylint ignore
     .CodeMirror

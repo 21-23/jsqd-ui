@@ -4,12 +4,12 @@ import Beautifier from 'js-beautify';
 
 import 'codemirror/lib/codemirror.css';
 import 'common/styles/code-theme.styl';
-import './code.styl';
+import './code-box.styl';
 
-//imports specific language mode for code-input
+//imports specific language mode for code-box
 import 'codemirror/mode/javascript/javascript';
 
-export default class Code extends Component {
+export default class CodeBox extends Component {
     componentDidMount() {
         const config = {
             mode: 'javascript',
@@ -23,7 +23,7 @@ export default class Code extends Component {
         };
         Object.assign(config, this.props.config);
 
-        this.code = CodeMirror.fromTextArea(this.textarea, config);
+        this.codeBox = CodeMirror.fromTextArea(this.textarea, config);
         this.setCode(this.props.value);
     }
 
@@ -38,16 +38,16 @@ export default class Code extends Component {
     }
 
     get value() {
-        return this.code.getValue();
+        return this.codeBox.getValue();
     }
 
     set value(value) {
-        this.code.getDoc().setValue(value);
+        this.codeBox.getDoc().setValue(value);
     }
 
     render() {
         return (
-            <div className="code">
+            <div className="code-box">
                 { /* preact doesn't support refs */}
                 <textarea readOnly ref={ component => this.textarea = component }/>
             </div>

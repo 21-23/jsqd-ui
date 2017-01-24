@@ -4,8 +4,8 @@ import 'common/styles/reset.styl';
 import './game-styles.styl';
 
 import UserPanel from 'common/components/user-panel/user-panel';
-import CodeInput from './components/code-input/code-input';
-import Code from 'common/components/code/code';
+import CodeEditor from './components/code-editor/code-editor';
+import CodeBox from 'common/components/code-box/code-box';
 
 //DATA FOR TEST
 const CONTENT = [
@@ -19,9 +19,9 @@ render((
     <div className="game-view">
         <UserPanel userName="Player" />
         <div className='flex-justify-center'>
-            <Code value={JSON.stringify(CONTENT)}/>
-            <Code value={Code.toString()}/>
+            <CodeBox value={JSON.stringify(CONTENT)}/>
+            <CodeBox value={CodeEditor.toString()}/>
         </div>
-        <CodeInput/>
+        <CodeEditor/>
     </div>
 ), document.body);
