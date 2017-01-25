@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
 import UserPanel from 'common/components/user-panel/user-panel';
+import Timer from 'common/components/timer/timer';
 import CodeEditor from './code-editor/code-editor';
 import CodeBox from 'common/components/code-box/code-box';
 
@@ -14,10 +15,11 @@ const CONTENT = [
 ];
 
 class GameApp extends Component {
-    render({ userPanel }) {
+    render({ userPanel, roundRemaining, roundDuration }) {
         return (
             <div>
                 <UserPanel {...userPanel} />
+                <Timer radius={50} strokeWidth={5} value={roundRemaining} maxValue={roundDuration}  />
                 <div>
                     <div className="puzzle">
                         <CodeBox value={Component.toString()}/>
@@ -35,6 +37,8 @@ class GameApp extends Component {
 
 export default connect((state) => {
     return {
-        userPanel: state.userPanel
+        userPanel: state.userPanel,
+        roundDuration: state.currentRound.duration,
+        roundRemaining: state.currentRound.remaining,
     };
 })(GameApp);
