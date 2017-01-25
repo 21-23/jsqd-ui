@@ -1,5 +1,3 @@
-import { connect } from 'preact-redux';
-
 const defaultState = {
     displayName: 'Player',
     iconCharCode: '\uf007',
