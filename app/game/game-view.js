@@ -9,9 +9,7 @@ import GameApp from './components/GameApp';
 import store from './store/store';
 
 render((
-    <div className="game-view">
-        <Provider store={store}>
-            <GameApp />
-        </Provider>
-    </div>
+    <Provider store={store}>
+        <GameApp />
+    </Provider>
 ), document.body);

@@ -5,34 +5,23 @@ import UserPanel from 'common/components/user-panel/user-panel';
 
 import GameProgress from 'common/components/game-progress/game-progress';
 import Timer from 'common/components/timer/timer';
-import CodeEditor from './code-editor/code-editor';
-import CodeBox from 'common/components/code-box/code-box';
-
-//DATA FOR TEST
-const CONTENT = [
-    { name: 'Johnie', surname: 'Walker', age: 14 },
-    { name: 'Johnie', surname: 'Walker', age: 20 },
-    { name: 'Adam', surname: 'Smith', age: 99 },
-    { name: 'Jack', surname: 'Daniels', age: 18 },
-];
+import GameTask from 'common/components/game-task/game-task';
+import GameInput from './game-input/game-input';
 
 class GameApp extends Component {
 
-    render({ userPanel, rounds, currentRoundIndex, roundRemaining, roundDuration }) {
+    render({ userPanel, rounds, currentRoundIndex, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
         return (
-            <div>
+            <div className="game-view">
                 <UserPanel {...userPanel} />
-                <GameProgress rounds={rounds} currentRoundIndex={currentRoundIndex} />
-                <Timer radius={50} strokeWidth={5} value={roundRemaining} maxValue={roundDuration}  />
-                <div>
-                    <div className="puzzle">
-                        <CodeBox value={Component.toString()}/>
-                        <CodeBox value={JSON.stringify([1, 2, 3, 4, 5])}/>
+                <div className="view-content">
+                    <GameProgress rounds={rounds} currentRoundIndex={currentRoundIndex} />
+                    <div className="round-header">
+                        <div className="round-name">{roundName}</div>
+                        <Timer radius={30} strokeWidth={3} value={roundRemaining} maxValue={roundDuration}  />
                     </div>
-                    <div className="editor">
-                        <CodeEditor/>
-                        <CodeBox value={JSON.stringify(CONTENT)}/>
-                    </div>
+                    <GameTask source={roundSource} target={roundTarget} />
+                    <GameInput />
                 </div>
             </div>
         );
@@ -46,6 +35,8 @@ export default connect((state) => {
         currentRoundIndex: state.game.currentRoundIndex,
         roundDuration: state.currentRound.duration,
         roundRemaining: state.currentRound.remaining,
-
+        roundName: state.currentRound.name,
+        roundSource: state.currentRound.taskSource,
+        roundTarget: state.currentRound.tasktarget
     };
 })(GameApp);
