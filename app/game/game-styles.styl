@@ -4,12 +4,17 @@ html
     min-height 100%
     font-size 14px
     background linear-gradient(to top, background-blue-0 0, background-blue-1 35%, background-blue-2 70%, background-blue-3 100%)
+    overflow hidden
 
 .game-view
     font-family Helvetica, 'Helvetica Neue', Arial
+    height 100vh
 
     .view-content
         padding 0 2vw
+        height 94vh
+        display flex
+        flex-direction column
 
     .user-panel
         width 100%
@@ -54,3 +59,7 @@ html
 
     .game-task
         margin-bottom 1vh
+        flex 1.3
+
+    .game-input
+        flex 1

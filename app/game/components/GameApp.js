@@ -6,11 +6,21 @@ import UserPanel from 'common/components/user-panel/user-panel';
 import GameProgress from 'common/components/game-progress/game-progress';
 import Timer from 'common/components/timer/timer';
 import GameTask from 'common/components/game-task/game-task';
+import OverlayWelcome from 'common/components/overlay-welcome/overlay-welcome';
 import GameInput from './game-input/game-input';
 
-class GameApp extends Component {
+function chooseOverlay(connected) {
+    if (!connected) {
+        return <OverlayWelcome />;
+    }
 
-    render({ userName, userRole, rounds, currentRoundIndex, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
+    return null;
+}
+
+class GameApp extends Component {
+    render({ userName, userRole, rounds, currentRoundIndex, connected, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
+        const overlay = chooseOverlay(connected);
+
         return (
             <div className="game-view">
                 <UserPanel displayName={userName} role={userRole} />
@@ -23,6 +33,7 @@ class GameApp extends Component {
                     <GameTask source={roundSource} target={roundTarget} />
                     <GameInput />
                 </div>
+                {overlay}
             </div>
         );
     }
@@ -34,6 +45,7 @@ export default connect((state) => {
         userRole: state.userInfo.role,
         rounds: state.game.rounds,
         currentRoundIndex: state.game.currentRoundIndex,
+        connected: state.game.connected,
         roundDuration: state.currentRound.duration,
         roundRemaining: state.currentRound.remaining,
         roundName: state.currentRound.name,
