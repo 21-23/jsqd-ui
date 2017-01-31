@@ -15,11 +15,9 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
     phoenix
         .on('connected', () => {
             console.log('server connected');
-            dispatch(updateUserInfo({ displayName: 'con' }));
         })
         .on('disconnected', () => {
             console.log('server disconnected');
-            dispatch(updateUserInfo({ displayName: 'dis' }));
         })
         .on('message', (message) => {
             console.log('server message', message);

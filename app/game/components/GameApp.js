@@ -10,10 +10,10 @@ import GameInput from './game-input/game-input';
 
 class GameApp extends Component {
 
-    render({ userPanel, rounds, currentRoundIndex, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
+    render({ userName, userRole, rounds, currentRoundIndex, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
         return (
             <div className="game-view">
-                <UserPanel {...userPanel} />
+                <UserPanel displayName={userName} role={userRole} />
                 <div className="view-content">
                     <GameProgress rounds={rounds} currentRoundIndex={currentRoundIndex} />
                     <div className="round-header">
@@ -30,7 +30,8 @@ class GameApp extends Component {
 
 export default connect((state) => {
     return {
-        userPanel: state.userPanel,
+        userName: state.userInfo.displayName,
+        userRole: state.userInfo.role,
         rounds: state.game.rounds,
         currentRoundIndex: state.game.currentRoundIndex,
         roundDuration: state.currentRound.duration,

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import game from './game';
-import userPanel from './user-panel';
+import userInfo from './user-info';
 import currentRound from './current-round';
 
 export default combineReducers({
     game,
-    userPanel,
+    userInfo,
     currentRound
 });
