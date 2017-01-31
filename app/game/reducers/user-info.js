@@ -1,3 +1,5 @@
+import { UPDATE_USER_INFO } from '../actions/user-info';
+
 const defaultState = {
     displayName: 'Player',
     role: 'player'
@@ -5,7 +7,7 @@ const defaultState = {
 
 export default function userInfo(state = defaultState, action) {
     switch(action.type) {
-        case 'UPDATE_USER_INFO':
+        case UPDATE_USER_INFO:
             return Object.assign({}, state, {
                 displayName: action.payload.displayName,
                 role: action.payload.role,

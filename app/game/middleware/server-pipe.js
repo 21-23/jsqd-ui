@@ -4,6 +4,15 @@ import config from '../config.json';
 
 import { updateUserInfo } from '../action-creators/user-info';
 
+function handleServerMessage(message, dispatch) {
+    switch (message.type) {
+        case 'update-user-info':
+            return dispatch(updateUserInfo(message.payload));
+        default:
+            return console.warn('Unknown message from server');
+    }
+}
+
 export default function serverPipeMiddleware({ getState, dispatch }) {
     // we can create a pipe immediately
     // phoenix will connect it ASAP
@@ -22,6 +31,8 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
         .on('message', (message) => {
             console.log('server message', message);
             const parsedMessage = parseMessage(message.data, true);
+
+            handleServerMessage(parsedMessage, dispatch);
         });
 
     return (next) => {
