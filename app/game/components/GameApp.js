@@ -50,6 +50,6 @@ export default connect((state) => {
         roundRemaining: state.currentRound.remaining,
         roundName: state.currentRound.name,
         roundSource: state.currentRound.taskSource,
-        roundTarget: state.currentRound.tasktarget
+        roundTarget: state.currentRound.taskTarget
     };
 })(GameApp);
