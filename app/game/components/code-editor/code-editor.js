@@ -66,7 +66,8 @@ export default class CodeEditor extends Component {
     }
 
     set value(value) {
-        this.codeEditor.getDoc().setValue(value);
+        const doc = this.codeEditor.getDoc();
+        return value ? doc.setValue(value) : doc.setValue('');
     }
 
     render() {
