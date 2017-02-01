@@ -15,6 +15,12 @@ import './code-editor.styl';
 
 //TODO: Fix autocomplete issues
 export default class CodeEditor extends Component {
+    constructor(props) {
+        super(props);
+
+        this.boundOnChange = this.onChange.bind(this);
+    }
+
     componentDidMount() {
         const config = {
             mode: 'javascript',
@@ -28,22 +34,12 @@ export default class CodeEditor extends Component {
         Object.assign(config, this.props.config);
         this.codeEditor = CodeMirror.fromTextArea(this.textarea, config);
 
-        // beta autocomplete. off by default
-        if (this.props.enableAutocomplete) {
-            this.codeEditor.on('change', this.onChange.bind(this));
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.value !== this.props.value) {
-            this.value = this.props.value;
-        }
+        this.codeEditor.on('change', this.boundOnChange);
     }
 
     componentWillUnmount() {
-        if (this.props.enableAutocomplete) {
-            this.codeEditor.off('change', this.onChange.bind(this));
-        }
+        this.codeEditor.off('change', this.boundOnChange);
+        this.boundOnChange = null;
         this.codeEditor = null;
     }
 
@@ -51,30 +47,22 @@ export default class CodeEditor extends Component {
         const isValidChange = event.origin !== 'complete';
         const isNewLine = isNewLineEvent(event);
         const isValidChar = isValidSymbol(event.text[0]);
+        const value = editor.getValue();
 
-        if (isValidChange && !isNewLine && isValidChar) {
+        if (this.props.enableAutocomplete && isValidChange && !isNewLine && isValidChar) {
             CodeMirror.commands.autocomplete(editor, null, { completeSingle: false });
         }
 
         if (typeof this.props.onChange === 'function') {
-            this.props.onChange(event, this.value);
+            this.props.onChange(value, event);
         }
-    }
-
-    get value() {
-        return this.codeEditor.getValue();
-    }
-
-    set value(value) {
-        const doc = this.codeEditor.getDoc();
-        return value ? doc.setValue(value) : doc.setValue('');
     }
 
     render() {
         return (
             <div className="code-editor">
                 { /* preact doesn't support refs */}
-                <textarea ref={ component => this.textarea = component } value={this.props.value} readOnly/>
+                <textarea ref={ component => this.textarea = component } readOnly/>
             </div>
 
         );

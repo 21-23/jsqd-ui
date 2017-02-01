@@ -41,6 +41,7 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
     return (next) => {
         return (action) => {
             // TODO: react on actions-commands (like send input to zandbak)
+            console.log(action);
             return  next(action);
         };
     };
