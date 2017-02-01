@@ -2,6 +2,8 @@ import createPhoenix from 'phoenix';
 import { createMessage, parseMessage } from 'message-factory';
 import config from '../config.json';
 
+import { VERIFY_USER_SOLUTION } from '../actions/puzzle-flow';
+
 import { updateUserInfo } from '../action-creators/user-info';
 import { updateConnectionStatus } from '../action-creators/connection';
 
@@ -11,6 +13,16 @@ function handleServerMessage(message, dispatch) {
             return dispatch(updateUserInfo(message.payload));
         default:
             return console.warn('Unknown message from server');
+    }
+}
+
+function handleClientAction(action, phoenix, dispatch, getState) {
+    switch (action.type) {
+        case VERIFY_USER_SOLUTION:
+            const message = createMessage('front-end-service', { type: 'solution', input: action.payload });
+            return phoenix.send(message);
+        default:
+            return console.log('Skip action reaction:', action.type);
     }
 }
 
@@ -40,8 +52,8 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
 
     return (next) => {
         return (action) => {
-            // TODO: react on actions-commands (like send input to zandbak)
-            console.log(action);
+            handleClientAction(action, phoenix, dispatch, getState);
+
             return  next(action);
         };
     };

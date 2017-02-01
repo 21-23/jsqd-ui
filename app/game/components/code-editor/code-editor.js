@@ -37,6 +37,13 @@ export default class CodeEditor extends Component {
         this.codeEditor.on('change', this.boundOnChange);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.currentRoundIndex !== nextProps.currentRoundIndex) {
+            const doc = this.codeEditor.getDoc();
+            doc.setValue('');
+        }
+    }
+
     componentWillUnmount() {
         this.codeEditor.off('change', this.boundOnChange);
         this.boundOnChange = null;

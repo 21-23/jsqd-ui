@@ -2862,6 +2862,10 @@ message-factory@games4nerds/message-factory#1.1.1:
   version "1.1.1"
   resolved "https://codeload.github.com/games4nerds/message-factory/tar.gz/9445228fb51488366109fc0502f4726b279a6f2e"
 
+message-factory@games4nerds/message-factory#2.1.0:
+  version "2.1.0"
+  resolved "https://codeload.github.com/games4nerds/message-factory/tar.gz/36e72834263347575dc78e4866dfc2e2ca9ffdb8"
+
 methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
@@ -3294,10 +3298,6 @@ pbkdf2@^3.0.3:
   resolved "https://registry.yarnpkg.com/pbkdf2/-/pbkdf2-3.0.9.tgz#f2c4b25a600058b3c3773c086c37dbbee1ffe693"
   dependencies:
     create-hmac "^1.1.2"
-
-phoenix@games4nerds/phoenix#2.0.2:
-  version "2.0.2"
-  resolved "https://codeload.github.com/games4nerds/phoenix/tar.gz/7f5ebb37b004b66eaf4cadd18359ca7d77f857b9"
 
 phoenix@games4nerds/phoenix#2.0.3:
   version "2.0.3"

@@ -10,10 +10,10 @@ import { verifyUserSolution } from '../../action-creators/puzzle-flow';
 import './game-input.styl';
 
 class GameInput extends Component {
-    render({ result, dispatch }) {
+    render({ result, dispatch, currentRoundIndex }) {
         return (
             <div className="game-input">
-                <CodeEditor onChange={bindActionCreators(verifyUserSolution, dispatch)} />
+                <CodeEditor onChange={bindActionCreators(verifyUserSolution, dispatch)} currentRoundIndex={currentRoundIndex} />
                 <div className="separator"></div>
                 <CodeBox value={result} />
             </div>
@@ -23,6 +23,7 @@ class GameInput extends Component {
 
 export default connect((state) => {
     return {
-        result: ''
+        result: state.currentRound.currentSolutionResult,
+        currentRoundIndex: state.game.currentRoundIndex,
     };
 })(GameInput);

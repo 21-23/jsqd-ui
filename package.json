@@ -35,7 +35,7 @@
   "dependencies": {
     "codemirror": "^5.23.0",
     "js-beautify": "^1.6.8",
-    "message-factory": "games4nerds/message-factory#1.1.1",
+    "message-factory": "games4nerds/message-factory#2.1.0",
     "phoenix": "games4nerds/phoenix#2.0.3",
     "preact": "^7.1.0",
     "preact-redux": "^2.0.0",
