@@ -7,6 +7,7 @@ import GameProgress from 'common/components/game-progress/game-progress';
 import Timer from 'common/components/timer/timer';
 import GameTask from 'common/components/game-task/game-task';
 import OverlayWelcome from 'common/components/overlay-welcome/overlay-welcome';
+import PlaceholderCountdown from 'common/components/placeholder-countdown/placeholder-countdown';
 import GameInput from './game-input/game-input';
 
 function chooseOverlay(connected) {
@@ -17,9 +18,18 @@ function chooseOverlay(connected) {
     return null;
 }
 
+function chooseTaskPlaceholder(roundPhase, roundSource, roundTarget, countdownRemaining) {
+    if (roundPhase === 'countdown') {
+        return <PlaceholderCountdown value={countdownRemaining} />;
+    }
+
+    return <GameTask source={roundSource} target={roundTarget} />;
+}
+
 class GameApp extends Component {
-    render({ userName, userRole, rounds, currentRoundIndex, connected, roundRemaining, roundDuration, roundName, roundSource, roundTarget }) {
+    render({ userName, userRole, rounds, currentRoundIndex, connected, roundRemaining, roundDuration, roundName, roundSource, roundTarget, roundPhase, countdownRemaining }) {
         const overlay = chooseOverlay(connected);
+        const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundSource, roundTarget, countdownRemaining);
 
         return (
             <div className="game-view">
@@ -30,7 +40,7 @@ class GameApp extends Component {
                         <div className="round-name">{roundName}</div>
                         <Timer radius={30} strokeWidth={3} value={roundRemaining} maxValue={roundDuration}  />
                     </div>
-                    <GameTask source={roundSource} target={roundTarget} />
+                    {taskPlaceholder}
                     <GameInput />
                 </div>
                 {overlay}
@@ -50,6 +60,8 @@ export default connect((state) => {
         roundRemaining: state.currentRound.remaining,
         roundName: state.currentRound.name,
         roundSource: state.currentRound.taskSource,
-        roundTarget: state.currentRound.taskTarget
+        roundTarget: state.currentRound.taskTarget,
+        roundPhase: state.currentRound.phase,
+        countdownRemaining: state.currentRound.countdownRemaining
     };
 })(GameApp);

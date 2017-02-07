@@ -6,7 +6,9 @@ const defaultState = {
     remaining: 95,
     taskSource: JSON.stringify([{ name: 'Johnie', surname: 'Walker', age: 14 }, { name: 'Johnie', surname: 'Walker', age: 20 },{ name: 'Adam', surname: 'Smith', age: 99 },{ name: 'Jack', surname: 'Daniels', age: 18 }]),
     taskTarget: JSON.stringify([14, 20, 99, 18]),
-    currentSolutionResult: ''
+    currentSolutionResult: '',
+    phase: 'idle', // idle | countdown | game | end
+    countdownRemaining: 2
 };
 
 export default function currentRound(state = defaultState, action) {
