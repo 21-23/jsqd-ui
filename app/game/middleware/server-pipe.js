@@ -6,9 +6,34 @@ import { VERIFY_USER_SOLUTION } from '../actions/puzzle-flow';
 
 import { updateUserInfo } from '../action-creators/user-info';
 import { updateConnectionStatus } from '../action-creators/connection';
+import { updateUserSolutionResult, updateCurrentPuzzle, updateCurrentRoundPhase, updateCountdown, updatePuzzleData, updateRoundRemaining } from '../action-creators/puzzle-flow';
 
 function handleServerMessage(message, dispatch) {
-    switch (message.type) {
+    switch (message.name) {
+        case 'solution.evaluated':
+            return updateUserSolutionResult({
+                error: message.error,
+                result: message.result,
+                correct: message.correct,
+                time: message.time,
+            });
+        case 'puzzle.changed':
+            return updateCurrentPuzzle({
+                duration: message.timeLimit,
+                index: message.puzzleIndex,
+                name: message.puzzleName,
+            });
+        case 'roundPhase.changed':
+            return updateCurrentRoundPhase(message.roundPhase);
+        case 'startCountdown.changed':
+            return updateCountdown(message.startCountdown);
+        case 'puzzle':
+            return updatePuzzleData({
+                input: message.input,
+                expected: message.expected,
+            });
+        case 'roundCountdown.changed':
+            return updateRoundRemaining(message.roundCountdown);
         case 'update-user-info':
             return dispatch(updateUserInfo(message.payload));
         default:
@@ -43,11 +68,11 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
             console.log('server disconnected');
             dispatch(updateConnectionStatus(false));
         })
-        .on('message', (message) => {
-            console.log('server message', message);
-            const parsedMessage = parseMessage(message.data, true);
+        .on('message', (incomingMessage) => {
+            console.log('server message', incomingMessage);
+            const { message } = parseMessage(incomingMessage.data);
 
-            handleServerMessage(parsedMessage, dispatch);
+            handleServerMessage(message, dispatch);
         });
 
     return (next) => {
