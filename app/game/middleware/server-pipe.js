@@ -44,7 +44,7 @@ function handleServerMessage(message, dispatch) {
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
         case VERIFY_USER_SOLUTION:
-            const message = createMessage('front-end-service', { type: 'solution', input: action.payload });
+            const message = createMessage('front-service', { name: 'solution', input: action.payload });
             return phoenix.send(message);
         default:
             return console.log('Skip action reaction:', action.type);

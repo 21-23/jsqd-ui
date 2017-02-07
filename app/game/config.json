@@ -1,6 +1,6 @@
 {
     "server-endpoint": {
-        "uri": "ws://localhost:8888/",
+        "uri": "ws://localhost:3001/",
         "timeout": 500
     }
 }
