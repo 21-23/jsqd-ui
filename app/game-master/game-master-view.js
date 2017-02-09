@@ -1,12 +1,15 @@
 import { h, render } from 'preact';
+import { Provider } from 'preact-redux';
 
 import 'common/styles/reset.styl';
 import './game-master-styles.styl';
 
-import UserPanel from 'common/components/user-panel/user-panel';
+import GameMasterApp from './components/GameMasterApp';
+
+import store from './store/store';
 
 render((
-    <div className="game-master-view">
-        <UserPanel userName="Game Master" />
-    </div>
+    <Provider store={store}>
+        <GameMasterApp />
+    </Provider>
 ), document.body);
