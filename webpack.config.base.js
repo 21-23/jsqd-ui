@@ -3,8 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const debug = process.env.NODE_ENV !== 'production';
-
 module.exports = {
     entry: {
         'login': './app/login/login-view.js',
@@ -15,7 +13,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js'
     },
-    devtool: debug ? 'source-map' : false,
     module: {
         rules: [
             {
@@ -99,10 +96,4 @@ module.exports = {
             chunks: ['game-master']
         }),
     ],
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 8082,
-        host: '0.0.0.0'
-    }
 };

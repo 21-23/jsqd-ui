@@ -4,9 +4,10 @@
   "main": "app/index.js",
   "license": "LGPL-3.0",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=development webpack",
-    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.dev.js",
+    "build:prod": " webpack --config webpack.config.prod.js",
+    "watch": "cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch",
     "lint": "eslint ./app && stylint ./app",
     "precommit": "lint-staged"
   },
@@ -30,6 +31,7 @@
     "stylus-loader": "^2.4.0",
     "webpack": "2.2.0",
     "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^2.6.1",
     "webpack-notifier": "^1.5.0"
   },
   "dependencies": {
