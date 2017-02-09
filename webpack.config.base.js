@@ -8,6 +8,7 @@ module.exports = {
         'login': './app/login/login-view.js',
         'game': './app/game/game-view.js',
         'game-master': './app/game-master/game-master-view.js',
+        'landing': './app/landing/landing-view.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -94,6 +95,11 @@ module.exports = {
             filename: 'game-master.html',
             template: 'app/game-master/game-master.html',
             chunks: ['game-master']
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'app/landing/landing.html',
+            chunks: ['landing']
         }),
     ],
 };
