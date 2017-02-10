@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import game from './game';
-import userInfo from './user-info';
+import session from './session';
+import participant from './participant';
 import currentRound from './current-round';
 
 export default combineReducers({
-    game,
-    userInfo,
+    session,
+    participant,
     currentRound
 });

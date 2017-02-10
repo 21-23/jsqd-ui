@@ -2,40 +2,37 @@ import createPhoenix from 'phoenix';
 import { createMessage, parseMessage } from 'message-factory';
 import config from '../config.json';
 
-import { VERIFY_USER_SOLUTION } from '../actions/puzzle-flow';
+import * as RoundActions from '../actions/round';
 
-import { updateUserInfo } from '../action-creators/user-info';
 import { updateConnectionStatus } from '../action-creators/connection';
-import { updateUserSolutionResult, updateCurrentPuzzle, updateCurrentRoundPhase, updateCountdown, updatePuzzleData, updateRoundRemaining } from '../action-creators/puzzle-flow';
+import RoundActionsCreator from '../action-creators/round';
 
 function handleServerMessage(message, dispatch) {
     switch (message.name) {
         case 'solution.evaluated':
-            return updateUserSolutionResult({
+            return RoundActionsCreator.updateSolutionResult({
                 error: message.error,
                 result: message.result,
                 correct: message.correct,
                 time: message.time,
             });
         case 'puzzle.changed':
-            return updateCurrentPuzzle({
-                duration: message.timeLimit,
+            return RoundActionsCreator.updateCurrentRound({
                 index: message.puzzleIndex,
+                duration: message.timeLimit,
                 name: message.puzzleName,
             });
         case 'roundPhase.changed':
-            return updateCurrentRoundPhase(message.roundPhase);
+            return RoundActionsCreator.updateRoundPhase(message.roundPhase);
         case 'startCountdown.changed':
-            return updateCountdown(message.startCountdown);
+            return RoundActionsCreator.updateCountdown(message.startCountdown);
         case 'puzzle':
-            return updatePuzzleData({
+            return RoundActionsCreator.updatePuzzle({
                 input: message.input,
                 expected: message.expected,
             });
         case 'roundCountdown.changed':
-            return updateRoundRemaining(message.roundCountdown);
-        case 'update-user-info':
-            return dispatch(updateUserInfo(message.payload));
+            return RoundActionsCreator.updateRemaining(message.roundCountdown);
         default:
             return console.warn('Unknown message from server');
     }
@@ -43,7 +40,7 @@ function handleServerMessage(message, dispatch) {
 
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
-        case VERIFY_USER_SOLUTION:
+        case RoundActions.SOLUTION:
             const message = createMessage('front-service', { name: 'solution', input: action.payload });
             return phoenix.send(message);
         default:
@@ -56,7 +53,7 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
     // phoenix will connect it ASAP
     const phoenix = createPhoenix(WebSocket, {
         uri: config['server-endpoint']['uri'],
-        timeout: config['server-endpoint']['timeout']
+        timeout: config['server-endpoint']['timeout'],
     });
 
     phoenix

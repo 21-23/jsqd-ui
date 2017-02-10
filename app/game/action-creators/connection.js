@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
 
-import { UPDATE_CONNECTION_STATUS } from '../actions/connection';
+import { CONNECTION_STATUS } from '../actions/connection';
 
-export const updateConnectionStatus = createAction(UPDATE_CONNECTION_STATUS);
+export const updateConnectionStatus = createAction(CONNECTION_STATUS);
