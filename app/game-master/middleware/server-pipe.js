@@ -2,6 +2,8 @@ import createPhoenix from 'phoenix';
 import { createMessage, parseMessage } from 'message-factory';
 import config from '../config.json';
 
+import * as RoundActions from '../actions/round';
+
 import { updateConnectionStatus } from '../action-creators/connection';
 
 function handleServerMessage(message, dispatch) {
@@ -13,6 +15,9 @@ function handleServerMessage(message, dispatch) {
 
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
+        case RoundActions.SELECTED_ROUND:
+            const message = createMessage('front-service', { name: 'select-puzzle', index: action.payload });
+            return phoenix.send(message);
         default:
             return console.log('Skip action reaction:', action.type);
     }

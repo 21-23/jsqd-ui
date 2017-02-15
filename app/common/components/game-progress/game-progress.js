@@ -2,16 +2,23 @@ import { h } from 'preact';
 
 import './game-progress.styl';
 
-function getMarkClass(index, currentRoundIndex) {
+function getMarkClasses(index, currentRoundIndex) {
+    const classes = {
+        'mark': true,
+        '-past': false,
+        '-future': false,
+        '-current': false,
+    };
+
     if (index < currentRoundIndex) {
-        return '-past';
+        classes['-past'] = true;
+    } else if (index > currentRoundIndex) {
+        classes['-future'] = true;
+    } else {
+        classes['-current'] = true;
     }
 
-    if (index > currentRoundIndex) {
-        return '-future';
-    }
-
-    return '-current';
+    return classes;
 }
 
 function getMarkText(index, currentRoundIndex) {
@@ -26,16 +33,30 @@ function getProgressFactor(currentRoundIndex, totalRounds) {
     return currentRoundIndex / (totalRounds - 1);
 }
 
+function getRootClasses(isSelectable) {
+    return {
+        'game-progress': true,
+        '-selectable': isSelectable
+    };
+}
+
+function onMarkClick(onSelect, index) {
+    onSelect(index);
+
+    return false;
+}
+
 // TODO: split into several sub-components for faster re-rendering
-export default function GameProgress({ rounds, currentRoundIndex }) {
+export default function GameProgress({ rounds, currentRoundIndex, onSelect }) {
+    const isSelectable = (typeof onSelect === 'function');
     const marks = rounds.map((round, index) => {
         return(
-            <div className={getMarkClass(index, currentRoundIndex)}>{getMarkText(index, currentRoundIndex)}</div>
+            <div onClick={isSelectable ? onMarkClick.bind(null, onSelect, index) : null} className={getMarkClasses(index, currentRoundIndex)}>{getMarkText(index, currentRoundIndex)}</div>
         );
     });
 
     return (
-        <div className="game-progress">
+        <div className={getRootClasses(isSelectable)}>
             <div className="progress-bar" style={{ transform: `scaleX(${getProgressFactor(currentRoundIndex, rounds.length)})` }}></div>
             <div className="round-mark-container">
                 {marks}

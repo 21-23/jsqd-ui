@@ -3,3 +3,5 @@ export const ROUND_PHASE = 'ROUND_PHASE';
 export const COUNTDOWN = 'COUNTDOWN';
 export const PUZZLE = 'PUZZLE';
 export const REMAINING = 'REMAINING';
+
+export const SELECTED_ROUND = 'SELECTED_ROUND';

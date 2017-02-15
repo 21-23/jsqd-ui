@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 
 import UserPanel from 'common/components/user-panel/user-panel';
@@ -9,6 +10,8 @@ import OverlayWelcome from 'common/components/overlay-welcome/overlay-welcome';
 import Puzzle from 'common/components/puzzle/puzzle';
 import PlaceholderCountdown from 'common/components/placeholder-countdown/placeholder-countdown';
 import GameControls from './game-controls/game-controls';
+
+import { selectRound } from '../action-creators/round';
 
 function chooseOverlay(connected) {
     if (!connected) {
@@ -27,7 +30,7 @@ function chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownR
 }
 
 class GameMasterApp extends Component {
-    render({ participant, connected, puzzles, currentRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining }) {
+    render({ dispatch, participant, connected, puzzles, currentRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining }) {
         const overlay = chooseOverlay(connected);
         const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownRemaining);
 
@@ -35,7 +38,7 @@ class GameMasterApp extends Component {
             <div className="game-master-view">
                 <UserPanel displayName={participant.displayName} role={participant.role} />
                 <div className="view-content">
-                    <GameProgress rounds={puzzles} currentRoundIndex={currentRoundIndex} />
+                    <GameProgress rounds={puzzles} currentRoundIndex={currentRoundIndex} onSelect={bindActionCreators(selectRound, dispatch)} />
                     <div className="main-content">
                         <div class="task-column">
                             <div className="task-header">
