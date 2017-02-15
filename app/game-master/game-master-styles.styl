@@ -4,10 +4,73 @@ html
     min-height 100%
     font-size 14px
     background linear-gradient(to top, background-blue-0 0, background-blue-1 35%, background-blue-2 70%, background-blue-3 100%)
+    overflow hidden
 
 .game-master-view
     font-family Helvetica, 'Helvetica Neue', Arial
+    height 100vh
+
+    .view-content
+        padding 0 2vw
+        height 94vh
+        display flex
+        flex-direction column
 
     .user-panel
         width 100%
         height 5vh
+
+    .game-progress
+        margin-top -.25vh
+
+        .progress-bar
+            background main-text
+
+        .round-mark-container
+            .-past
+                color main-text
+                border .15em solid alpha(background-blue-0, .5)
+            .-current
+                color main-text
+            .-future
+                color secondary-action-color
+
+    .main-content
+        display flex
+        height 100%
+
+        .task-column
+            flex 2
+            display flex
+            flex-direction column
+
+            .task-header
+                display flex
+                justify-content space-between
+
+                .round-name
+                    color main-text
+                    font-size 150%
+                    font-weight bold
+
+                .timer
+                    .time-text
+                        color main-text
+
+                    .circle-container
+                        .circle-elapsed
+                            stroke alpha(background-blue-0, .5)
+
+                        .circle-remaining
+                            stroke main-text
+
+            .puzzle
+                flex-direction column
+                flex 2
+
+                .separator
+                    width 100%
+                    height 1vh
+
+        .participants-column
+            flex 1

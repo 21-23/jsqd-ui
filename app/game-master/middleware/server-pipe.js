@@ -2,6 +2,8 @@ import createPhoenix from 'phoenix';
 import { createMessage, parseMessage } from 'message-factory';
 import config from '../config.json';
 
+import { updateConnectionStatus } from '../action-creators/connection';
+
 function handleServerMessage(message, dispatch) {
     switch (message.name) {
         default:
@@ -27,9 +29,11 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
     phoenix
         .on('connected', () => {
             console.log('server connected');
+            dispatch(updateConnectionStatus(true));
         })
         .on('disconnected', () => {
             console.log('server disconnected');
+            dispatch(updateConnectionStatus(false));
         })
         .on('message', (incomingMessage) => {
             console.log('server message', incomingMessage);
