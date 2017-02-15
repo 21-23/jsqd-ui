@@ -8,6 +8,7 @@ import Timer from 'common/components/timer/timer';
 import OverlayWelcome from 'common/components/overlay-welcome/overlay-welcome';
 import Puzzle from 'common/components/puzzle/puzzle';
 import PlaceholderCountdown from 'common/components/placeholder-countdown/placeholder-countdown';
+import GameControls from './game-controls/game-controls';
 
 function chooseOverlay(connected) {
     if (!connected) {
@@ -40,7 +41,7 @@ class GameMasterApp extends Component {
                             <div className="task-header">
                                 <div className="task-controls">
                                     <div className="round-name">{roundName}</div>
-                                    <div>CONTROLS</div>
+                                    <GameControls />
                                 </div>
                                 <Timer radius={40} strokeWidth={5} value={roundRemaining} maxValue={roundDuration}  />
                             </div>

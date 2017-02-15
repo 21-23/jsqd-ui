@@ -1,0 +1,21 @@
+@import '~common/fonts/families.styl'
+@import '~common/styles/color-palette.styl'
+@import '~common/styles/common.styl'
+
+.game-controls
+    display flex
+
+    .game-control
+        rounded-icon-button()
+        background transparent
+
+        &:hover
+            cursor pointer
+
+        &.start
+            &:before
+                content '\f04b'
+
+        &.stop
+            &:before
+                content '\f04d'
