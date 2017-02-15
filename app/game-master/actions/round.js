@@ -5,3 +5,5 @@ export const PUZZLE = 'PUZZLE';
 export const REMAINING = 'REMAINING';
 
 export const SELECTED_ROUND = 'SELECTED_ROUND';
+export const START_ROUND = 'START_ROUND';
+export const STOP_ROUND = 'STOP_ROUND';

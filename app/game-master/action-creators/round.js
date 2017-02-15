@@ -9,3 +9,5 @@ export const updatePuzzle = createAction(RoundActions.PUZZLE);
 export const updateRemaining = createAction(RoundActions.REMAINING);
 
 export const selectRound = createAction(RoundActions.SELECTED_ROUND);
+export const startRound = createAction(RoundActions.START_ROUND);
+export const stopRound = createAction(RoundActions.STOP_ROUND);
