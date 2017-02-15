@@ -10,6 +10,7 @@ import OverlayWelcome from 'common/components/overlay-welcome/overlay-welcome';
 import Puzzle from 'common/components/puzzle/puzzle';
 import PlaceholderCountdown from 'common/components/placeholder-countdown/placeholder-countdown';
 import GameControls from './game-controls/game-controls';
+import RoundScore from './round-score/round-score';
 
 import { selectRound } from '../action-creators/round';
 
@@ -50,7 +51,9 @@ class GameMasterApp extends Component {
                             </div>
                             {taskPlaceholder}
                         </div>
-                        <div class="participants-column"></div>
+                        <div class="participants-column">
+                            <RoundScore />
+                        </div>
                     </div>
                 </div>
                 {overlay}

@@ -1,0 +1,52 @@
+@import '~common/fonts/families.styl'
+@import '~common/styles/color-palette.styl'
+
+.round-score
+    .header
+        .stats
+            display flex
+
+            .-joined, .-solved
+                flex 1
+                display flex
+
+                .value, .meta
+                    flex 1
+
+                .value
+                    font-size 3em
+                    text-align right
+
+                .meta
+                    display flex
+                    flex-direction column
+                    justify-content center
+                    padding-left .5em
+
+                    .icon
+                        padding-bottom .2em
+
+                        &:before
+                            font-family AwesomeIcon
+                            content '\f0c0'
+
+            .-joined
+                color holy-white
+
+            .-solved
+                color winning-green
+
+            .separator
+                width .15vw
+                background super-light-blue
+
+        .list-header
+            display flex
+            border-bottom 3px solid super-light-blue
+            padding .4em 0
+            color secondary-action-color
+
+            .-name
+                flex 3
+            .-time, -length
+                flex 1
