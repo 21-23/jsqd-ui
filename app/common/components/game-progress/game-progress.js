@@ -2,12 +2,13 @@ import { h } from 'preact';
 
 import './game-progress.styl';
 
-function getMarkClasses(index, currentRoundIndex) {
+function getMarkClasses(index, currentRoundIndex, isSelectable, selectedRoundIndex) {
     const classes = {
         'mark': true,
         '-past': false,
         '-future': false,
         '-current': false,
+        '-selected': false,
     };
 
     if (index < currentRoundIndex) {
@@ -16,6 +17,10 @@ function getMarkClasses(index, currentRoundIndex) {
         classes['-future'] = true;
     } else {
         classes['-current'] = true;
+    }
+
+    if (isSelectable && Number.isFinite(selectedRoundIndex) && index === selectedRoundIndex) {
+        classes['-selected'] = true;
     }
 
     return classes;
@@ -47,11 +52,11 @@ function onMarkClick(onSelect, index) {
 }
 
 // TODO: split into several sub-components for faster re-rendering
-export default function GameProgress({ rounds, currentRoundIndex, onSelect }) {
+export default function GameProgress({ rounds, currentRoundIndex, selectedRoundIndex, onSelect }) {
     const isSelectable = (typeof onSelect === 'function');
     const marks = rounds.map((round, index) => {
         return(
-            <div onClick={isSelectable ? onMarkClick.bind(null, onSelect, index) : null} className={getMarkClasses(index, currentRoundIndex)}>{getMarkText(index, currentRoundIndex)}</div>
+            <div onClick={isSelectable ? onMarkClick.bind(null, onSelect, index) : null} className={getMarkClasses(index, currentRoundIndex, isSelectable, selectedRoundIndex)}>{getMarkText(index, currentRoundIndex)}</div>
         );
     });
 

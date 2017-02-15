@@ -30,7 +30,7 @@ function chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownR
 }
 
 class GameMasterApp extends Component {
-    render({ dispatch, participant, connected, puzzles, currentRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining }) {
+    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining }) {
         const overlay = chooseOverlay(connected);
         const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownRemaining);
 
@@ -38,7 +38,7 @@ class GameMasterApp extends Component {
             <div className="game-master-view">
                 <UserPanel displayName={participant.displayName} role={participant.role} />
                 <div className="view-content">
-                    <GameProgress rounds={puzzles} currentRoundIndex={currentRoundIndex} onSelect={bindActionCreators(selectRound, dispatch)} />
+                    <GameProgress rounds={puzzles} currentRoundIndex={currentRoundIndex} selectedRoundIndex={selectedRoundIndex} onSelect={bindActionCreators(selectRound, dispatch)} />
                     <div className="main-content">
                         <div class="task-column">
                             <div className="task-header">
@@ -65,6 +65,7 @@ export default connect((state) => {
         connected: state.session.connected,
         puzzles: state.session.puzzles,
         currentRoundIndex: state.session.currentRoundIndex,
+        selectedRoundIndex: state.session.selectedRoundIndex,
         roundName: state.currentRound.name,
         roundRemaining: state.currentRound.remaining,
         roundDuration: state.currentRound.duration,

@@ -22,3 +22,15 @@
         .mark
             &:hover
                 cursor pointer
+
+            &.-selected
+                position relative
+
+                &:before
+                    font-family AwesomeIcon
+                    content '\f144'
+                    position absolute
+                    left -.6em
+                    top -.6em
+                    font-size .5em
+
