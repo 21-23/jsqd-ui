@@ -1,0 +1,1 @@
+export const PARTICIPANT_INFO = 'PARTICIPANT_INFO';

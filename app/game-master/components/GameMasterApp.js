@@ -3,11 +3,11 @@ import { connect } from 'preact-redux';
 
 import UserPanel from 'common/components/user-panel/user-panel';
 
-class GameApp extends Component {
-    render({ userName, userRole, rounds, currentRoundIndex }) {
+class GameMasterApp extends Component {
+    render({ participant }) {
         return (
             <div className="game-master-view">
-                <UserPanel displayName={userName} role={userRole} />
+                <UserPanel displayName={participant.displayName} role={participant.role} />
                 <div className="view-content">
                 </div>
             </div>
@@ -17,7 +17,6 @@ class GameApp extends Component {
 
 export default connect((state) => {
     return {
-        userName: state.userInfo.displayName,
-        userRole: state.userInfo.role,
+        participant: state.participant,
     };
-})(GameApp);
+})(GameMasterApp);
