@@ -2,7 +2,23 @@ import { h } from 'preact';
 
 import './round-score.styl';
 
-export default function RoundScore() {
+function generateEntries(score) {
+    return score.map((entry) => {
+        const rootClasses = {
+            'score-entry': true,
+            '-solved': entry.correct
+        };
+        return (
+            <div key={entry.participantId} className={rootClasses}>
+                <div className="-name">{entry.displayName}</div>
+                <div className="-time">{entry.time}</div>
+                <div className="-length">{entry.length}</div>
+            </div>
+        );
+    });
+}
+
+export default function RoundScore({ score }) {
     return (
         <div className="round-score">
             <div className="header">
@@ -29,7 +45,9 @@ export default function RoundScore() {
                     <div className="-length">Length</div>
                 </div>
             </div>
-            <div className="list-container"></div>
+            <div className="list-container">
+                {generateEntries(score)}
+            </div>
         </div>
     );
 }

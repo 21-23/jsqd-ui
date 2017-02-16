@@ -31,7 +31,7 @@ function chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownR
 }
 
 class GameMasterApp extends Component {
-    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining }) {
+    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining, roundScore }) {
         const overlay = chooseOverlay(connected);
         const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownRemaining);
 
@@ -51,9 +51,7 @@ class GameMasterApp extends Component {
                             </div>
                             {taskPlaceholder}
                         </div>
-                        <div class="participants-column">
-                            <RoundScore />
-                        </div>
+                        <RoundScore score={roundScore} />
                     </div>
                 </div>
                 {overlay}
@@ -76,5 +74,7 @@ export default connect((state) => {
         roundInput: state.currentRound.input,
         roundExpected: state.currentRound.expected,
         countdownRemaining: state.currentRound.countdownRemaining,
+        roundScore: state.score.round,
+        aggregateScore: state.score.aggregate,
     };
 })(GameMasterApp);

@@ -2,6 +2,9 @@
 @import '~common/styles/color-palette.styl'
 
 .round-score
+    display flex
+    flex-direction column
+
     .header
         .stats
             display flex
@@ -47,6 +50,26 @@
             color secondary-action-color
 
             .-name
-                flex 3
-            .-time, -length
-                flex 1
+                flex 3 1 70%
+            .-time, .-length
+                flex 1 1 15%
+                text-align right
+
+    .list-container
+        flex 1
+        overflow-y auto
+
+        .score-entry
+            display flex
+            line-height 160%
+            color holy-white
+            border-bottom 1px solid super-light-blue
+
+            &.-solved
+                color winning-green
+
+            .-name
+                flex 3 1 70%
+            .-time, .-length
+                flex 1 1 15%
+                text-align right
