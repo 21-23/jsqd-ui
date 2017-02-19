@@ -3299,6 +3299,10 @@ phoenix@games4nerds/phoenix#2.0.3:
   version "2.0.3"
   resolved "https://codeload.github.com/games4nerds/phoenix/tar.gz/895d578c4e0f8476ee06ea7d9bafa48277331639"
 
+phoenix@games4nerds/phoenix#2.1.0:
+  version "2.1.0"
+  resolved "https://codeload.github.com/games4nerds/phoenix/tar.gz/48c87e3c3a596e3b29597b779303f534ed6958ea"
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
