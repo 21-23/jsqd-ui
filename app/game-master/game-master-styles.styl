@@ -42,24 +42,33 @@ html
     .main-content
         display flex
         height 100%
+        padding-top .7em
 
         .task-column
             flex 2
             display flex
             flex-direction column
+            margin-right 2vw
 
             .task-header
                 display flex
                 justify-content space-between
+                padding-bottom .7em
 
-                .round-name
-                    color main-text
-                    font-size 150%
-                    font-weight bold
+                .task-controls
+                    display flex
+                    flex-direction column
+                    justify-content space-around
+
+                    .round-name
+                        color main-text
+                        font-size 150%
+                        font-weight bold
 
                 .timer
                     .time-text
                         color main-text
+                        font-size 2em
 
                     .circle-container
                         .circle-elapsed
