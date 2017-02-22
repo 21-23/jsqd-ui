@@ -91,5 +91,30 @@ html
                 border-radius 3px
                 font-size 250px
 
-        .round-score
+        .scores
             flex 1
+            position relative
+            overflow hidden
+
+            .round-score, .aggregate-score
+                transition transform 300ms linear
+
+            .round-score
+                width 100%
+                height 100%
+                transform translateX(0)
+
+            .aggregate-score
+                width 100%
+                height 100%
+                position absolute
+                top 0
+                left 0
+                transform translateX(100%)
+
+
+            &.-aggregate
+                .round-score
+                    transform translateX(-100%)
+                .aggregate-score
+                    transform translateX(0)

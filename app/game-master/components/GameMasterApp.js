@@ -11,6 +11,7 @@ import Puzzle from 'common/components/puzzle/puzzle';
 import PlaceholderCountdown from 'common/components/placeholder-countdown/placeholder-countdown';
 import GameControls from './game-controls/game-controls';
 import RoundScore from './round-score/round-score';
+import AggregateScore from './aggregate-score/aggregate-score';
 
 import { selectRound } from '../action-creators/round';
 
@@ -31,7 +32,7 @@ function chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownR
 }
 
 class GameMasterApp extends Component {
-    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining, roundScore }) {
+    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining, roundScore, aggregateScore }) {
         const overlay = chooseOverlay(connected);
         const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownRemaining);
 
@@ -51,7 +52,10 @@ class GameMasterApp extends Component {
                             </div>
                             {taskPlaceholder}
                         </div>
-                        <RoundScore score={roundScore} />
+                        <div className="scores">
+                            <RoundScore score={roundScore} />
+                            <AggregateScore score={aggregateScore} />
+                        </div>
                     </div>
                 </div>
                 {overlay}

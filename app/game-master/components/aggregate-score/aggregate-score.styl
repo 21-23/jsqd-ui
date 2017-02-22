@@ -1,0 +1,38 @@
+@import '~common/fonts/families.styl'
+@import '~common/styles/color-palette.styl'
+
+.aggregate-score
+    display flex
+    flex-direction column
+
+    .list-header
+        display flex
+        border-bottom 3px solid super-light-blue
+        padding .4em 0
+        color secondary-action-color
+
+        .-position
+            flex 1 1 10%
+        .-name
+            flex 3 1 75%
+        .-time
+            flex 1 1 15%
+            text-align right
+
+    .list-container
+        flex 1
+        overflow-y auto
+
+        .score-entry
+            display flex
+            line-height 160%
+            color holy-white
+            border-bottom 1px solid super-light-blue
+
+            .-position
+                flex 1 1 10%
+            .-name
+                flex 3 1 75%
+            .-time
+                flex 1 1 15%
+                text-align right
