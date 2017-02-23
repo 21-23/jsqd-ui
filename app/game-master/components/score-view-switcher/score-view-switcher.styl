@@ -1,0 +1,24 @@
+@import '~common/fonts/families.styl'
+@import '~common/styles/color-palette.styl'
+@import '~common/styles/common.styl'
+
+.score-view-switcher
+    rounded-icon-button()
+    background transparent
+    position absolute
+    right 0
+    padding 0
+
+    &:before
+        margin 0
+
+    &:hover
+        cursor pointer
+
+    &.-round
+        &:before
+            content '\f053'
+
+    &.-aggregate
+        &:before
+            content '\f054'

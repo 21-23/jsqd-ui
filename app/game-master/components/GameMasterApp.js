@@ -12,6 +12,7 @@ import PlaceholderCountdown from 'common/components/placeholder-countdown/placeh
 import GameControls from './game-controls/game-controls';
 import RoundScore from './round-score/round-score';
 import AggregateScore from './aggregate-score/aggregate-score';
+import ScoreViewSwitcher from './score-view-switcher/score-view-switcher';
 
 import { selectRound } from '../action-creators/round';
 
@@ -31,8 +32,15 @@ function chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownR
     return <Puzzle input={roundInput} expected={roundExpected} />;
 }
 
+function getScoresClasses(visibleScore) {
+    return {
+        scores: true,
+        [`-${visibleScore}`]: true,
+    };
+}
+
 class GameMasterApp extends Component {
-    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining, roundScore, aggregateScore }) {
+    render({ dispatch, participant, connected, puzzles, currentRoundIndex, selectedRoundIndex, roundRemaining, roundDuration, roundName, roundInput, roundExpected, roundPhase, countdownRemaining, roundScore, aggregateScore, visibleScore }) {
         const overlay = chooseOverlay(connected);
         const taskPlaceholder = chooseTaskPlaceholder(roundPhase, roundInput, roundExpected, countdownRemaining);
 
@@ -52,11 +60,12 @@ class GameMasterApp extends Component {
                             </div>
                             {taskPlaceholder}
                         </div>
-                        <div className="scores">
+                        <div className={getScoresClasses(visibleScore)}>
                             <RoundScore score={roundScore} />
                             <AggregateScore score={aggregateScore} />
                         </div>
                     </div>
+                    <ScoreViewSwitcher visibleScore={visibleScore} />
                 </div>
                 {overlay}
             </div>
@@ -80,5 +89,6 @@ export default connect((state) => {
         countdownRemaining: state.currentRound.countdownRemaining,
         roundScore: state.score.round,
         aggregateScore: state.score.aggregate,
+        visibleScore: state.viewState.visibleScore,
     };
 })(GameMasterApp);
