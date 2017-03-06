@@ -42,6 +42,11 @@ export default class CodeEditor extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (this.props.isReadOnly !== nextProps.isReadOnly) {
+            //TODO: update component class for read only state
+            this.codeEditor.setOption('readOnly', nextProps.isReadOnly);
+        }
+
         if (this.props.currentRoundIndex !== nextProps.currentRoundIndex) {
             const doc = this.codeEditor.getDoc();
             doc.setValue('');
