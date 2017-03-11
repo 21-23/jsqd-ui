@@ -1,5 +1,5 @@
 import createPhoenix from 'phoenix';
-import { createMessage, parseMessage } from 'message-factory';
+import messageFactory from 'message-factory'; // TODO: no need in the whole module
 import config from '../config.json';
 
 import * as RoundActions from '../actions/round';
@@ -7,31 +7,34 @@ import * as RoundActions from '../actions/round';
 import { updateConnectionStatus } from '../action-creators/connection';
 import RoundActionsCreator from '../action-creators/round';
 
+const { parseMessage, protocol: { frontService, ui } } = messageFactory;
+const MESSAGE_NAME = ui.MESSAGE_NAME;
+
 function handleServerMessage(message, dispatch) {
     switch (message.name) {
-        case 'solution.evaluated':
+        case MESSAGE_NAME.solutionEvaluated:
             return RoundActionsCreator.updateSolutionResult({
                 error: message.error,
                 result: message.result,
                 correct: message.correct,
                 time: message.time,
             });
-        case 'puzzle.changed':
+        case MESSAGE_NAME.puzzleChanged:
             return RoundActionsCreator.updateCurrentRound({
                 index: message.puzzleIndex,
                 duration: message.timeLimit,
                 name: message.puzzleName,
             });
-        case 'roundPhase.changed':
+        case MESSAGE_NAME.roundPhaseChanged:
             return RoundActionsCreator.updateRoundPhase(message.roundPhase);
-        case 'startCountdown.changed':
+        case MESSAGE_NAME.startCountdownChanged:
             return RoundActionsCreator.updateCountdown(message.startCountdown);
-        case 'puzzle':
+        case MESSAGE_NAME.puzzle:
             return RoundActionsCreator.updatePuzzle({
                 input: message.input,
                 expected: message.expected,
             });
-        case 'roundCountdown.changed':
+        case MESSAGE_NAME.roundCountdownChanged:
             return RoundActionsCreator.updateRemaining(message.roundCountdown);
         default:
             return console.warn('Unknown message from server');
@@ -41,8 +44,7 @@ function handleServerMessage(message, dispatch) {
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
         case RoundActions.SOLUTION:
-            const message = createMessage('front-service', { name: 'solution', input: action.payload });
-            return phoenix.send(message);
+            return phoenix.send(frontService.solution(action.payload));
         default:
             return console.log('Skip action reaction:', action.type);
     }

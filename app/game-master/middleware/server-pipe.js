@@ -1,13 +1,18 @@
 import createPhoenix from 'phoenix';
-import { createMessage, parseMessage } from 'message-factory';
+import messageFactory from 'message-factory'; // TODO: no need in the whole module
 import config from '../config.json';
 
 import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
 
+const { parseMessage, protocol: { frontService, ui } } = messageFactory;
+const MESSAGE_NAME = ui.MESSAGE_NAME;
+
 function handleServerMessage(message, dispatch) {
     switch (message.name) {
+        case MESSAGE_NAME.participantJoined:
+            return;
         default:
             return console.warn('Unknown message from server');
     }
@@ -16,8 +21,7 @@ function handleServerMessage(message, dispatch) {
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
         case RoundActions.SELECTED_ROUND:
-            const message = createMessage('front-service', { name: 'select-puzzle', index: action.payload });
-            return phoenix.send(message);
+            return phoenix.send(frontService.puzzleIndexSet(action.payload));
         default:
             return console.log('Skip action reaction:', action.type);
     }
