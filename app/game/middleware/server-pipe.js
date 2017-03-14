@@ -1,6 +1,8 @@
 import createPhoenix from 'phoenix';
 import messageFactory from 'message-factory'; // TODO: no need in the whole module
+
 import config from '../config.json';
+import { buildEndpointUri } from 'common/utils/connection';
 
 import * as RoundActions from '../actions/round';
 
@@ -54,7 +56,7 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
     // we can create a pipe immediately
     // phoenix will connect it ASAP
     const phoenix = createPhoenix(WebSocket, {
-        uri: config['server-endpoint']['uri'],
+        uri: buildEndpointUri(config['server-endpoint']['uri']),
         timeout: config['server-endpoint']['timeout'],
     });
 
