@@ -1,3 +1,5 @@
+import { error } from 'steno';
+
 import * as RoundActions from '../actions/round';
 
 const RoundPhase = {
@@ -55,7 +57,7 @@ function updateRoundPhase(state, phase) {
         case RoundPhase.END:
             return Object.assign({}, state, { phase });
         default:
-            console.error('Unknown round phase');
+            error('Unknown round phase');
             return state;
     }
 }

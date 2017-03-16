@@ -1,5 +1,6 @@
 import createPhoenix from 'phoenix';
 import messageFactory from 'message-factory'; // TODO: no need in the whole module
+import { error, warn, log } from 'steno';
 
 import config from '../config.json';
 import { buildEndpointUri } from 'common/utils/connection';
@@ -16,7 +17,7 @@ function handleServerMessage(message, dispatch) {
         case MESSAGE_NAME.participantJoined:
             return;
         default:
-            return console.warn('Unknown message from server');
+            return warn('Unknown message from server');
     }
 }
 
@@ -25,7 +26,7 @@ function handleClientAction(action, phoenix, dispatch, getState) {
         case RoundActions.SELECTED_ROUND:
             return phoenix.send(frontService.puzzleIndexSet(action.payload));
         default:
-            return console.log('Skip action reaction:', action.type);
+            return log('Skip action reaction:', action.type);
     }
 }
 
@@ -39,15 +40,15 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
 
     phoenix
         .on('connected', () => {
-            console.log('server connected');
+            log('server connected');
             dispatch(updateConnectionStatus(true));
         })
         .on('disconnected', () => {
-            console.log('server disconnected');
+            log('server disconnected');
             dispatch(updateConnectionStatus(false));
         })
         .on('message', (incomingMessage) => {
-            console.log('server message', incomingMessage);
+            log('server message', incomingMessage);
             const { message } = parseMessage(incomingMessage.data);
 
             handleServerMessage(message, dispatch);
