@@ -23,7 +23,7 @@ class GameInput extends Component {
 
 export default connect((state) => {
     return {
-        result: state.currentRound.currentSolutionResult,
+        result: state.currentRound.solutionResult,
         currentRoundIndex: state.session.currentRoundIndex,
     };
 })(GameInput);

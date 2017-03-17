@@ -8,12 +8,12 @@ import { buildEndpointUri } from 'common/utils/connection';
 import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
-import RoundActionsCreator from '../action-creators/round';
+import * as RoundActionsCreator from '../action-creators/round';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
 
-function handleServerMessage(message, dispatch) {
+function getAction(message) {
     switch (message.name) {
         case MESSAGE_NAME.solutionEvaluated:
             return RoundActionsCreator.updateSolutionResult({
@@ -40,7 +40,17 @@ function handleServerMessage(message, dispatch) {
         case MESSAGE_NAME.roundCountdownChanged:
             return RoundActionsCreator.updateRemaining(message.roundCountdown);
         default:
-            return warn('Unknown message from server');
+            warn('Unknown message from server');
+    }
+
+    return null;
+}
+
+function handleServerMessage(message, dispatch) {
+    const action = getAction(message);
+
+    if (action) {
+        dispatch(action);
     }
 }
 
