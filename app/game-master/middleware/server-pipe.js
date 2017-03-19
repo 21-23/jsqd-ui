@@ -8,18 +8,44 @@ import { buildEndpointUri } from 'common/utils/connection';
 import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
+import * as ScoreActionsCreators from '../action-creators/score';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
 
-function handleServerMessage(message, dispatch) {
+function getAction(message) {
     switch (message.name) {
         case MESSAGE_NAME.participantJoined:
-            return;
+            return ScoreActionsCreators.addNewParticipant({
+                participantId: message.participantId,
+                displayName: message.displayName,
+            });
+        case MESSAGE_NAME.participantLeft:
+            return ScoreActionsCreators.removeParticipant({
+                participantId: message.participantId,
+            });
+        case MESSAGE_NAME.participantSolution:
+            return ScoreActionsCreators.updateParticipantSolution({
+                participantId: message.participantId,
+                time: message.time,
+                length: message.length,
+                correct: message.correct,
+            });
         default:
-            return warn('Unknown message from server');
+            return null;
     }
 }
+
+function handleServerMessage(message, dispatch) {
+    const action = getAction(message);
+
+    if (action) {
+        dispatch(action);
+    } else {
+        warn('Unknown message from server');
+    }
+}
+
 
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
@@ -37,6 +63,14 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
         uri: buildEndpointUri(config['server-endpoint']['uri']),
         timeout: config['server-endpoint']['timeout']
     });
+
+    //just for messages emulation
+    if (process.env.NODE_ENV !== 'production') {
+        window.dispatch = dispatch;
+        window.handleServerMessage = handleServerMessage;
+        window.MESSAGE_NAME = MESSAGE_NAME;
+    }
+
 
     phoenix
         .on('connected', () => {
@@ -58,7 +92,7 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
         return (action) => {
             handleClientAction(action, phoenix, dispatch, getState);
 
-            return  next(action);
+            return next(action);
         };
     };
 };

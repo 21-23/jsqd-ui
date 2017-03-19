@@ -40,10 +40,8 @@ function getAction(message) {
         case MESSAGE_NAME.roundCountdownChanged:
             return RoundActionsCreator.updateRemaining(message.roundCountdown);
         default:
-            warn('Unknown message from server');
+            return null;
     }
-
-    return null;
 }
 
 function handleServerMessage(message, dispatch) {
@@ -51,6 +49,8 @@ function handleServerMessage(message, dispatch) {
 
     if (action) {
         dispatch(action);
+    } else {
+        warn('Unknown message from server');
     }
 }
 
