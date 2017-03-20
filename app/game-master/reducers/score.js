@@ -12,36 +12,45 @@ const defaultParticipant = {
     correct: false,
 };
 
+function addNewParticipant(state, participant) {
+    const newParticipant = Object.assign({}, defaultParticipant, participant);
+
+    return Object.assign({}, state, {
+        round: state.round.concat([newParticipant]),
+        aggregate: state.aggregate.concat([newParticipant]),
+    });
+}
+
+function removeParticipant(state, id) {
+    const filterParticipants = participant => participant.participantId !== id;
+
+    return Object.assign({}, state, {
+        round: state.round.filter(filterParticipants),
+        aggregate: state.aggregate.filter(filterParticipants)
+    });
+}
+
+function updateParticipantRoundScore(state, participantData) {
+    const { participantId } = participantData;
+
+    return Object.assign({}, state, {
+        round: state.round.map((participant) => {
+            if (participant.participantId === participantId) {
+                return Object.assign({}, participant, participantData);
+            }
+
+            return participant;
+        })
+    });
+}
 export default function participant(state = defaultState, action) {
     switch (action.type) {
-        case PARTICIPANT_JOINED: {
-            const newParticipant = Object.assign({}, defaultParticipant, action.payload);
-
-            return Object.assign({}, state, {
-                round: state.round.concat([newParticipant]),
-                aggregate: state.aggregate.concat([newParticipant]),
-            });
-        }
-        case PARTICIPANT_LEFT: {
-            const filterParticipants = participant => participant.participantId !== action.payload.participantId;
-
-            return Object.assign({}, state, {
-                round: state.round.filter(filterParticipants),
-                aggregate: state.aggregate.filter(filterParticipants)
-            });
-        }
-        case PARTICIPANT_SOLUTION: {
-            return Object.assign({}, state, {
-                round: state.round.map((participant) => {
-                    if (participant.participantId === action.payload.participantId) {
-                        return Object.assign({}, participant, action.payload);
-                    }
-
-                    return participant;
-                })
-            });
-        }
-
+        case PARTICIPANT_JOINED:
+            return addNewParticipant(state, action.payload);
+        case PARTICIPANT_LEFT:
+            return removeParticipant(state, action.payload.participantId);
+        case PARTICIPANT_SOLUTION:
+            return updateParticipantRoundScore(state, action.payload);
         default:
             return state;
     }
