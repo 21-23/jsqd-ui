@@ -17,7 +17,6 @@ function addNewParticipant(state, participant) {
 
     return Object.assign({}, state, {
         round: state.round.concat([newParticipant]),
-        aggregate: state.aggregate.concat([newParticipant]),
     });
 }
 
@@ -26,7 +25,6 @@ function removeParticipant(state, id) {
 
     return Object.assign({}, state, {
         round: state.round.filter(filterParticipants),
-        aggregate: state.aggregate.filter(filterParticipants)
     });
 }
 
