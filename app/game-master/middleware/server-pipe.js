@@ -8,7 +8,8 @@ import { buildEndpointUri } from 'common/utils/connection';
 import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
-import * as ScoreActionsCreators from '../action-creators/score';
+import { addNewParticipant, removeParticipant } from '../action-creators/participant';
+import { updateParticipantSolution } from '../action-creators/round';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
@@ -16,16 +17,16 @@ const MESSAGE_NAME = ui.MESSAGE_NAME;
 function getAction(message) {
     switch (message.name) {
         case MESSAGE_NAME.participantJoined:
-            return ScoreActionsCreators.addNewParticipant({
+            return addNewParticipant({
                 participantId: message.participantId,
                 displayName: message.displayName,
             });
         case MESSAGE_NAME.participantLeft:
-            return ScoreActionsCreators.removeParticipant({
+            return removeParticipant({
                 participantId: message.participantId,
             });
         case MESSAGE_NAME.participantSolution:
-            return ScoreActionsCreators.updateParticipantSolution({
+            return updateParticipantSolution({
                 participantId: message.participantId,
                 time: message.time,
                 length: message.length,
