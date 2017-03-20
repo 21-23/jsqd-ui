@@ -15,7 +15,7 @@ const defaultParticipant = {
 export default function participant(state = defaultState, action) {
     switch (action.type) {
         case PARTICIPANT_JOINED: {
-            const newParticipant = Object.assign(defaultParticipant, action.payload);
+            const newParticipant = Object.assign({}, defaultParticipant, action.payload);
 
             return Object.assign({}, state, {
                 round: state.round.concat([newParticipant]),
