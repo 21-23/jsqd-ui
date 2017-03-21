@@ -1,80 +1,54 @@
-const defaultState = {
-    round: [
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc1', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc2', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe3', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe4', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds5', time: 148, length: 402, correct: false },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc6', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc7', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe8', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe9', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds10', time: 148, length: 402, correct: false },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc11', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc12', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe13', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe14', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds15', time: 148, length: 402, correct: false },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc16', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc17', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe18', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe19', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds20', time: 148, length: 402, correct: false },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc21', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc22', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe23', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe24', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds25', time: 148, length: 402, correct: false },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe26', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe27', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds28', time: 148, length: 402, correct: false },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc29', time: 25, length: 43, correct: true },
-        { displayName: 'Cat Simon', participantId: 'qwe-543-zxc30', time: 43, length: 32, correct: true },
-        { displayName: 'Donald Trump', participantId: '098-423-qwe31', time: 148, length: 320, correct: false },
-        { displayName: 'Jack Daniels', participantId: 'dad-423-qwe32', time: 148, length: 4, correct: false },
-        { displayName: 'Owl', participantId: 'dad-423-cds33', time: 148, length: 402, correct: false },
-    ],
-    aggregate: [
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc1', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc2', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc3', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc4', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc5', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc6', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc7', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc8', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc9', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc10', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc11', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc12', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc13', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc14', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc15', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc16', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc17', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc18', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc19', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc20', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc21', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc22', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc23', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc24', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc25', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc26', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc27', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc28', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc29', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc30', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc31', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc32', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc33', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc34', time: 25 },
-        { displayName: 'John Wick', participantId: 'qwe-asd-zxc35', time: 25 },
-    ],
+import MockData from '../mock-data/score';
+import {
+    PARTICIPANT_JOINED,
+    PARTICIPANT_LEFT,
+} from '../actions/participant';
+import { PARTICIPANT_SOLUTION } from '../actions/round';
+
+const defaultState = MockData;
+const defaultParticipant = {
+    time: null,
+    length: 0,
+    correct: false,
 };
 
+function addNewParticipant(state, participant) {
+    const newParticipant = Object.assign({}, defaultParticipant, participant);
+
+    return Object.assign({}, state, {
+        round: state.round.concat([newParticipant]),
+    });
+}
+
+function removeParticipant(state, id) {
+    const filterParticipants = participant => participant.participantId !== id;
+
+    return Object.assign({}, state, {
+        round: state.round.filter(filterParticipants),
+    });
+}
+
+function updateParticipantRoundScore(state, participantData) {
+    const { participantId } = participantData;
+
+    return Object.assign({}, state, {
+        round: state.round.map((participant) => {
+            if (participant.participantId === participantId) {
+                return Object.assign({}, participant, participantData);
+            }
+
+            return participant;
+        })
+    });
+}
 export default function participant(state = defaultState, action) {
-    switch(action.type) {
+    switch (action.type) {
+        case PARTICIPANT_JOINED:
+            return addNewParticipant(state, action.payload);
+        case PARTICIPANT_LEFT:
+            return removeParticipant(state, action.payload.participantId);
+        case PARTICIPANT_SOLUTION:
+            return updateParticipantRoundScore(state, action.payload);
         default:
             return state;
     }
