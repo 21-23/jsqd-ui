@@ -37,7 +37,7 @@
   "dependencies": {
     "codemirror": "^5.23.0",
     "js-beautify": "^1.6.8",
-    "message-factory": "21-23/message-factory#v2.3.0",
+    "message-factory": "21-23/message-factory#v2.5.1",
     "phoenix": "21-23/phoenix#v2.1.0",
     "preact": "^7.1.0",
     "preact-redux": "^2.0.0",

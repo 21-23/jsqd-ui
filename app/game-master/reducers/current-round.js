@@ -1,6 +1,9 @@
 import { error } from 'steno';
 
 import * as RoundActions from '../actions/round';
+import { SESSION_STATE } from '../actions/session';
+
+import MockData from '../mock-data/current-round';
 
 const RoundPhase = {
     IDLE: 'idle',
@@ -9,15 +12,7 @@ const RoundPhase = {
     END: 'end'
 };
 
-const defaultState = {
-    name: 'Current round',
-    duration: 120,
-    remaining: 95,
-    input: JSON.stringify([{ name: 'Johnie', surname: 'Walker', age: 14 }, { name: 'Johnie', surname: 'Walker', age: 20 },{ name: 'Adam', surname: 'Smith', age: 99 },{ name: 'Jack', surname: 'Daniels', age: 18 }]),
-    expected: JSON.stringify([14, 20, 99, 18]),
-    phase: RoundPhase.IDLE,
-    countdownRemaining: 0,
-};
+const defaultState = MockData;
 
 function updateRound(state, round) {
     const { puzzle } = round;
@@ -71,6 +66,8 @@ function updateRemaining(state, remaining) {
 
 export default function currentRound(state = defaultState, action) {
     switch(action.type) {
+        case SESSION_STATE:
+            return Object.assign({}, state, action.payload.round);
         case RoundActions.CURRENT_ROUND:
             return updateRound(state, action.payload);
         case RoundActions.ROUND_PHASE:

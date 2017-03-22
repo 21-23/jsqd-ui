@@ -10,12 +10,44 @@ import * as RoundActions from '../actions/round';
 import { updateConnectionStatus } from '../action-creators/connection';
 import { addNewParticipant, removeParticipant } from '../action-creators/participant';
 import { updateParticipantSolution } from '../action-creators/round';
+import { setSessionState } from '../action-creators/session';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
 
+function formatStateMessage(message) {
+    const { roundCountdown, startCountdown, roundPhase } = message;
+    const { input, expected, name } = message.puzzle;
+    const { roundScore, aggregateScore } = message.score;
+    const { puzzleIndex, puzzleCount } = message;
+
+    return {
+        round: {
+            name,
+            input,
+            expected,
+            countdownRemaining: roundCountdown,
+            duration: startCountdown,
+            phase: roundPhase,
+        },
+        participant: {
+            participantId: message.participantId,
+        },
+        score: {
+            round: roundScore,
+            aggregate: aggregateScore,
+        },
+        session: {
+            currentRoundIndex: puzzleIndex,
+            puzzleCount: puzzleCount,
+        }
+    };
+}
+
 function getAction(message) {
     switch (message.name) {
+        case MESSAGE_NAME.sessionState:
+            return setSessionState(formatStateMessage(message));
         case MESSAGE_NAME.participantJoined:
             return addNewParticipant({
                 participantId: message.participantId,

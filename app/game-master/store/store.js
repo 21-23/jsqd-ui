@@ -4,4 +4,10 @@ import reducer from '../reducers';
 
 import serverPipe from '../middleware/server-pipe';
 
-export default createStore(reducer, applyMiddleware(serverPipe));
+const store = createStore(reducer, applyMiddleware(serverPipe));
+
+if (process.env.NODE_ENV !== 'production') {
+    window.store = store;
+}
+
+export default store;
