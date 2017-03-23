@@ -2858,9 +2858,9 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
-message-factory@21-23/message-factory#v2.3.0:
-  version "2.3.0"
-  resolved "https://codeload.github.com/21-23/message-factory/tar.gz/6e8987f221a8e9379692a2908dea84a162f14a35"
+message-factory@21-23/message-factory#v2.5.1:
+  version "2.5.1"
+  resolved "https://codeload.github.com/21-23/message-factory/tar.gz/280d1ca694ced4501ee3203f36fc25d546d82c91"
 
 methods@~1.1.2:
   version "1.1.2"
@@ -4251,10 +4251,6 @@ stampit@1.2.0:
 "statuses@>= 1.3.1 < 2", statuses@~1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
-
-steno@21-23/steno#v0.1.1:
-  version "0.1.1"
-  resolved "https://codeload.github.com/21-23/steno/tar.gz/f1552352cd4c7a63734b3da763d9011e4eb902f6"
 
 steno@21-23/steno#v1.0.0:
   version "1.0.0"

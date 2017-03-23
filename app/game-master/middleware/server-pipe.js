@@ -19,7 +19,7 @@ function formatStateMessage(message) {
     const { roundCountdown, startCountdown, roundPhase } = message;
     const { input, expected, name } = message.puzzle;
     const { roundScore, aggregateScore } = message.score;
-    const { puzzleIndex, puzzleCount } = message;
+    const { puzzleIndex, puzzleCount, displayName } = message;
 
     return {
         round: {
@@ -31,7 +31,7 @@ function formatStateMessage(message) {
             phase: roundPhase,
         },
         participant: {
-            participantId: message.participantId,
+            displayName,
         },
         score: {
             round: roundScore,
