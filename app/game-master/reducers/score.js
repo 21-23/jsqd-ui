@@ -4,6 +4,7 @@ import {
     PARTICIPANT_LEFT,
 } from '../actions/participant';
 import { PARTICIPANT_SOLUTION } from '../actions/round';
+import { SESSION_STATE } from '../actions/session';
 
 const defaultState = MockData;
 const defaultParticipant = {
@@ -41,8 +42,11 @@ function updateParticipantRoundScore(state, participantData) {
         })
     });
 }
+
 export default function participant(state = defaultState, action) {
     switch (action.type) {
+        case SESSION_STATE:
+            return Object.assign({}, state, action.payload.score);
         case PARTICIPANT_JOINED:
             return addNewParticipant(state, action.payload);
         case PARTICIPANT_LEFT:
