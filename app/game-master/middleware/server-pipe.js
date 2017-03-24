@@ -39,7 +39,7 @@ function formatStateMessage(message) {
         },
         session: {
             currentRoundIndex: puzzleIndex,
-            puzzleCount: puzzleCount,
+            puzzleCount,
         }
     };
 }
