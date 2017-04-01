@@ -84,6 +84,10 @@ function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
         case RoundActions.SELECTED_ROUND:
             return phoenix.send(frontService.puzzleIndexSet(action.payload));
+        case RoundActions.START_ROUND:
+            return phoenix.send(frontService.roundStart());
+        case RoundActions.STOP_ROUND:
+            return phoenix.send(frontService.roundStop());
         default:
             return log('Skip action reaction:', action.type);
     }
