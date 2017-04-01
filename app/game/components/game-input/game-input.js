@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 
 import CodeBox from 'common/components/code-box/code-box';
