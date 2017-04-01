@@ -10,11 +10,11 @@ import { verifySolution } from '../../action-creators/round';
 import './game-input.styl';
 
 class GameInput extends Component {
-    render({ result, dispatch, playerInput, currentRoundIndex }) {
+    render({ result, playerInput, currentRoundIndex, verifySolution }) {
         return (
             <div className="game-input">
                 <CodeEditor
-                    onChange={bindActionCreators(verifySolution, dispatch)}
+                    onChange={verifySolution}
                     playerInput={playerInput}
                     currentRoundIndex={currentRoundIndex}
                 />
@@ -31,4 +31,6 @@ export default connect((state) => {
         playerInput: state.currentRound.playerInput,
         currentRoundIndex: state.session.currentRoundIndex,
     };
+}, {
+    verifySolution,
 })(GameInput);
