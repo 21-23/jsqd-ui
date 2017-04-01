@@ -9,7 +9,14 @@ import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
 import { addNewParticipant, removeParticipant } from '../action-creators/participant';
-import { updateParticipantSolution } from '../action-creators/round';
+import {
+    updateParticipantSolution,
+    updateRemaining,
+    updateCurrentRound,
+    updatePuzzle,
+    updateRoundPhase,
+    updateCountdown
+} from '../action-creators/round';
 import { setSessionState } from '../action-creators/session';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
@@ -64,6 +71,23 @@ function getAction(message) {
                 length: message.length,
                 correct: message.correct,
             });
+        case MESSAGE_NAME.roundCountdownChanged:
+            return updateRemaining(message.roundCountdown);
+        case MESSAGE_NAME.puzzleChanged:
+            return updateCurrentRound({
+                index: message.puzzleIndex,
+                duration: message.timeLimit,
+                name: message.puzzleName,
+            });
+        case MESSAGE_NAME.puzzle:
+            return updatePuzzle({
+                input: message.input,
+                expected: message.expected,
+            });
+        case MESSAGE_NAME.roundPhaseChanged:
+            return updateRoundPhase(message.roundPhase);
+        case MESSAGE_NAME.startCountdownChanged:
+            return updateCountdown(message.startCountdown);
         default:
             return null;
     }

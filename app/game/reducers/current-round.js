@@ -32,12 +32,10 @@ function updateSolution(state, solution) {
 }
 
 function updateRound(state, round) {
-    const { puzzle } = round;
-
     return Object.assign({}, state, {
-        name: puzzle.name,
-        duration: puzzle.duration,
-        remaining: puzzle.duration,
+        name: round.name,
+        duration: round.duration,
+        remaining: round.duration,
         input: '',
         expected: '',
         phase: RoundPhase.IDLE,

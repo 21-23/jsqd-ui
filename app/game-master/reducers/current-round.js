@@ -15,12 +15,10 @@ const RoundPhase = {
 const defaultState = MockData;
 
 function updateRound(state, round) {
-    const { puzzle } = round;
-
     return Object.assign({}, state, {
-        name: puzzle.name,
-        duration: puzzle.duration,
-        remaining: puzzle.duration,
+        name: round.name,
+        duration: round.duration,
+        remaining: round.duration,
         input: '',
         expected: '',
         phase: RoundPhase.IDLE,
@@ -77,7 +75,7 @@ export default function currentRound(state = defaultState, action) {
         case RoundActions.PUZZLE:
             return updatePuzzle(state, action.payload);
         case RoundActions.REMAINING:
-            return updateRemaining(action.payload);
+            return updateRemaining(state, action.payload);
         default:
             return state;
     }
