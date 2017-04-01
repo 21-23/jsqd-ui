@@ -2,6 +2,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -81,6 +82,25 @@ module.exports = {
     },
     plugins: [
         new WebpackNotifierPlugin(),
+        new FaviconsWebpackPlugin({
+            logo: 'common/img/logo.png',
+            persistentCache: true,
+            inject: true,
+            background: '#fff',
+            title: 'Lodash Quick Draw',
+            icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: true,
+                coast: false,
+                favicons: true,
+                firefox: true,
+                opengraph: false,
+                twitter: false,
+                yandex: false,
+                windows: false
+            }
+        }),
         new HtmlWebpackPlugin({
             filename: 'login.html',
             template: 'app/login/login.html',
