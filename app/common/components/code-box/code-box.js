@@ -33,8 +33,20 @@ export default class CodeBox extends Component {
         }
     }
 
+    formatValue(value) {
+        if (!value) {
+            return '';
+        } else if (typeof value === 'string') {
+            return value;
+        } else if (value instanceof Error) {
+            return value.toString();
+        }
+
+        return JSON.stringify(value);
+    }
+
     setCode(value = '') {
-        this.value = Beautifier.js_beautify(value);
+        this.value = Beautifier.js_beautify(this.formatValue(value));
     }
 
     get value() {
