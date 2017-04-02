@@ -6,7 +6,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        sourceType: "module"
+        "sourceType": "module"
     },
     "rules": {
         "comma-dangle": 0,

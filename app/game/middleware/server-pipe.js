@@ -9,9 +9,36 @@ import * as RoundActions from '../actions/round';
 
 import { updateConnectionStatus } from '../action-creators/connection';
 import * as RoundActionsCreator from '../action-creators/round';
+import { setSessionState } from '../action-creators/session';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
+
+function formatStateMessage(message) {
+    const { roundCountdown, startCountdown, roundPhase } = message;
+    const { input, expected, name, timeLimit } = message.puzzle;
+    const { puzzleIndex, puzzleCount, displayName, playerInput } = message;
+
+    return {
+        round: {
+            name,
+            input,
+            expected,
+            countdownRemaining: startCountdown,
+            duration: timeLimit,
+            remaining: roundCountdown,
+            phase: roundPhase,
+            playerInput,
+        },
+        participant: {
+            displayName,
+        },
+        session: {
+            currentRoundIndex: puzzleIndex,
+            puzzleCount,
+        },
+    };
+}
 
 function getAction(message) {
     switch (message.name) {
@@ -39,6 +66,8 @@ function getAction(message) {
             });
         case MESSAGE_NAME.roundCountdownChanged:
             return RoundActionsCreator.updateRemaining(message.roundCountdown);
+        case MESSAGE_NAME.sessionState:
+            return setSessionState(formatStateMessage(message));
         default:
             return null;
     }
@@ -70,6 +99,13 @@ export default function serverPipeMiddleware({ getState, dispatch }) {
         uri: buildEndpointUri(config['server-endpoint']['uri']),
         timeout: config['server-endpoint']['timeout'],
     });
+
+    //just for messages emulation
+    if (process.env.NODE_ENV !== 'production') {
+        window.dispatch = dispatch;
+        window.handleServerMessage = handleServerMessage;
+        window.MESSAGE_NAME = MESSAGE_NAME;
+    }
 
     phoenix
         .on('connected', () => {

@@ -18,13 +18,27 @@ function generateEntries(score) {
     });
 }
 
+function getJoinedCount(score) {
+    return score.length;
+}
+
+function getSolvedCount(score) {
+    return score.reduce((solved, entry) => {
+        if (entry.correct) {
+            return solved + 1;
+        }
+
+        return solved;
+    }, 0);
+}
+
 export default function RoundScore({ score }) {
     return (
         <div className="round-score">
             <div className="header">
                 <div className="stats">
                     <div className="-joined">
-                        <div className="value">10</div>
+                        <div className="value">{getJoinedCount(score)}</div>
                         <div className="meta">
                             <div className="icon"></div>
                             <div className="text">Joined</div>
@@ -32,7 +46,7 @@ export default function RoundScore({ score }) {
                     </div>
                     <div className="separator"></div>
                     <div className="-solved">
-                        <div className="value">4</div>
+                        <div className="value">{getSolvedCount(score)}</div>
                         <div className="meta">
                             <div className="icon"></div>
                             <div className="text">Solved</div>

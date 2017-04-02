@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 
 import UserPanel from 'common/components/user-panel/user-panel';
@@ -29,7 +28,7 @@ function getScoresClasses(visibleScore) {
 }
 
 class GameMasterApp extends Component {
-    render({ dispatch, participant, session, currentRound, score, visibleScore }) {
+    render({ participant, session, currentRound, score, visibleScore, selectRound }) {
         const {
             connected,
             puzzles,
@@ -47,7 +46,7 @@ class GameMasterApp extends Component {
                     <GameProgress rounds={puzzles}
                                   currentRoundIndex={currentRoundIndex}
                                   selectedRoundIndex={selectedRoundIndex}
-                                  onSelect={bindActionCreators(selectRound, dispatch)}
+                                  onSelect={selectRound}
                     />
                     <div className="main-content">
                         <TaskColumn round={currentRound} />
@@ -72,4 +71,6 @@ export default connect((state) => {
         score: state.score,
         visibleScore: state.viewState.visibleScore,
     };
+}, {
+    selectRound,
 })(GameMasterApp);

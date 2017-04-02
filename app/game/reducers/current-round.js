@@ -1,6 +1,7 @@
 import { error } from 'steno';
 
 import * as RoundActions from '../actions/round';
+import { SESSION_STATE } from '../actions/session';
 
 const RoundPhase = {
     IDLE: 'idle',
@@ -10,17 +11,18 @@ const RoundPhase = {
 };
 
 const defaultState = {
-    name: 'Current round',
-    duration: 120,
-    remaining: 95,
-    input: JSON.stringify([{ name: 'Johnie', surname: 'Walker', age: 14 }, { name: 'Johnie', surname: 'Walker', age: 20 },{ name: 'Adam', surname: 'Smith', age: 99 },{ name: 'Jack', surname: 'Daniels', age: 18 }]),
-    expected: JSON.stringify([14, 20, 99, 18]),
+    name: '', // Current round',
+    duration: 0, // 120,
+    remaining: 0, // 95,
+    input: '', // JSON.stringify([{ name: 'Johnie', surname: 'Walker', age: 14 }, { name: 'Johnie', surname: 'Walker', age: 20 },{ name: 'Adam', surname: 'Smith', age: 99 },{ name: 'Jack', surname: 'Daniels', age: 18 }]),
+    expected: '', // JSON.stringify([14, 20, 99, 18]),
     phase: RoundPhase.IDLE,
     countdownRemaining: 0,
 
     solutionTime: 0,
     solutionResult: '',
     correct: false,
+    playerInput: '',
 };
 
 function updateSolution(state, solution) {
@@ -32,12 +34,10 @@ function updateSolution(state, solution) {
 }
 
 function updateRound(state, round) {
-    const { puzzle } = round;
-
     return Object.assign({}, state, {
-        name: puzzle.name,
-        duration: puzzle.duration,
-        remaining: puzzle.duration,
+        name: round.name,
+        duration: round.duration,
+        remaining: round.duration,
         input: '',
         expected: '',
         phase: RoundPhase.IDLE,
@@ -81,6 +81,14 @@ function updateRemaining(state, remaining) {
     return Object.assign({}, state, { remaining });
 }
 
+function updatePlayerInput(state, playerInput) {
+    return Object.assign({}, state, { playerInput });
+}
+
+function updateRoundState(state, roundState) {
+    return Object.assign({}, state, roundState);
+}
+
 export default function currentRound(state = defaultState, action) {
     switch(action.type) {
         case RoundActions.SOLUTION_RESULT:
@@ -94,7 +102,11 @@ export default function currentRound(state = defaultState, action) {
         case RoundActions.PUZZLE:
             return updatePuzzle(state, action.payload);
         case RoundActions.REMAINING:
-            return updateRemaining(action.payload);
+            return updateRemaining(state, action.payload);
+        case RoundActions.SOLUTION:
+            return updatePlayerInput(state, action.payload);
+        case SESSION_STATE:
+            return updateRoundState(state, action.payload.round);
         default:
             return state;
     }

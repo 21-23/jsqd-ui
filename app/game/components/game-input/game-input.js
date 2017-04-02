@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 
 import CodeBox from 'common/components/code-box/code-box';
@@ -10,10 +9,14 @@ import { verifySolution } from '../../action-creators/round';
 import './game-input.styl';
 
 class GameInput extends Component {
-    render({ result, dispatch, currentRoundIndex }) {
+    render({ result, playerInput, currentRoundIndex, verifySolution }) {
         return (
             <div className="game-input">
-                <CodeEditor onChange={bindActionCreators(verifySolution, dispatch)} currentRoundIndex={currentRoundIndex} />
+                <CodeEditor
+                    onChange={verifySolution}
+                    playerInput={playerInput}
+                    currentRoundIndex={currentRoundIndex}
+                />
                 <div className="separator"></div>
                 <CodeBox value={result} />
             </div>
@@ -24,6 +27,9 @@ class GameInput extends Component {
 export default connect((state) => {
     return {
         result: state.currentRound.solutionResult,
+        playerInput: state.currentRound.playerInput,
         currentRoundIndex: state.session.currentRoundIndex,
     };
+}, {
+    verifySolution,
 })(GameInput);

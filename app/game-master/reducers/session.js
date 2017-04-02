@@ -1,5 +1,5 @@
 import { CONNECTION_STATUS } from '../actions/connection';
-import { SELECTED_ROUND } from '../actions/round';
+import { SELECTED_ROUND, CURRENT_ROUND } from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
 
 const defaultState = {
@@ -31,6 +31,10 @@ function updateSelectedRound(state, selectedRoundIndex) {
     return Object.assign({}, state, { selectedRoundIndex });
 }
 
+function updateCurrentRound(state, round) {
+    return Object.assign({}, state, { currentRoundIndex: round.index });
+}
+
 export default function session(state = defaultState, action) {
     switch(action.type) {
         case SESSION_STATE:
@@ -39,6 +43,8 @@ export default function session(state = defaultState, action) {
             return updateConnectionStatus(state, action.payload);
         case SELECTED_ROUND:
             return updateSelectedRound(state, action.payload);
+        case CURRENT_ROUND:
+            return updateCurrentRound(state, action.payload);
         default:
             return state;
     }
