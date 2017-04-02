@@ -17,12 +17,11 @@ import './code-editor.styl';
 export default class CodeEditor extends Component {
     constructor(props) {
         super(props);
-
         this.boundOnChange = this.onChange.bind(this);
     }
 
     componentDidMount() {
-        const config = {
+        const defaultConfig = {
             mode: 'javascript',
             lineNumbers: true,
             scrollbarStyle: null,
@@ -31,30 +30,45 @@ export default class CodeEditor extends Component {
             indentUnit: 4,
             theme: 'lodash',
         };
-        Object.assign(config, this.props.config);
-        this.codeEditor = CodeMirror.fromTextArea(this.textarea, config);
+        const { config, playerInput, isReadOnly } = this.props;
+        const selectedConfig = Object.assign({}, defaultConfig, config);
 
+        this.codeEditor = CodeMirror.fromTextArea(this.textarea, selectedConfig);
         this.codeEditor.on('change', this.boundOnChange);
-
-        this.codeEditor.getDoc().setValue(this.props.playerInput);
+        this.codeEditor.getDoc().setValue(playerInput);
+        this.setReadOnly(isReadOnly);
     }
 
     shouldComponentUpdate() {
         return false;
     }
 
+    setReadOnly(isReadOnly) {
+        this.codeEditor.setOption('readOnly', isReadOnly);
+        if (isReadOnly) {
+            this.wrapper.classList.add('readonly');
+        } else {
+            this.wrapper.classList.remove('readonly');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (this.props.isReadOnly !== nextProps.isReadOnly) {
-            //TODO: update component class for read only state
-            this.codeEditor.setOption('readOnly', nextProps.isReadOnly);
+        const {
+            isReadOnly,
+            playerInput,
+            currentRoundIndex,
+        } = nextProps;
+
+        if (this.props.isReadOnly !== isReadOnly) {
+            this.setReadOnly(isReadOnly);
         }
 
-        if (this.props.currentRoundIndex !== nextProps.currentRoundIndex) {
+        if (this.props.currentRoundIndex !== currentRoundIndex) {
             const doc = this.codeEditor.getDoc();
-            doc.setValue(nextProps.playerInput || '');
-        } else if (this.codeEditor.getValue() !== nextProps.playerInput) {
+            doc.setValue(playerInput || '');
+        } else if (this.codeEditor.getValue() !== playerInput) {
             const doc = this.codeEditor.getDoc();
-            doc.setValue(nextProps.playerInput);
+            doc.setValue(playerInput);
         }
     }
 
@@ -80,10 +94,12 @@ export default class CodeEditor extends Component {
     }
 
     render() {
+        const baseEditorClass = 'code-editor';
+        const editorClass = this.props.isReadOnly ? `${baseEditorClass} readonly` : baseEditorClass;
+
         return (
-            <div className="code-editor">
-                { /* preact doesn't support refs */}
-                <textarea ref={ component => this.textarea = component } readOnly/>
+            <div ref={ elem => this.wrapper = elem } className={editorClass}>
+                <textarea ref={ elem => this.textarea = elem } readOnly/>
             </div>
 
         );

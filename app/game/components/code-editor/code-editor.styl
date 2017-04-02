@@ -4,7 +4,16 @@
     padding 5px
     background theme-background
     border-radius 3px
-    //.CodeMirror
-    //    height code-mirror-height
+
+.code-editor.readonly
+    background readonly
+
+    .CodeMirror-gutter
+        background readonly
+    .CodeMirror-gutters
+        background readonly
+    .CodeMirror-cursors
+        display none !important  // @stylint ignore
+
 
 //TODO: styles for scrollbar?

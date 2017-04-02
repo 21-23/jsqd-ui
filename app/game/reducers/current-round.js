@@ -2,13 +2,7 @@ import { error } from 'steno';
 
 import * as RoundActions from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
-
-const RoundPhase = {
-    IDLE: 'idle',
-    COUNTDOWN: 'countdown',
-    IN_PROGRESS: 'in-progress',
-    END: 'end'
-};
+import { RoundPhases } from 'common/constants/round';
 
 const defaultState = {
     name: '', // Current round',
@@ -16,7 +10,7 @@ const defaultState = {
     remaining: 0, // 95,
     input: '', // JSON.stringify([{ name: 'Johnie', surname: 'Walker', age: 14 }, { name: 'Johnie', surname: 'Walker', age: 20 },{ name: 'Adam', surname: 'Smith', age: 99 },{ name: 'Jack', surname: 'Daniels', age: 18 }]),
     expected: '', // JSON.stringify([14, 20, 99, 18]),
-    phase: RoundPhase.IDLE,
+    phase: RoundPhases.IDLE,
     countdownRemaining: 0,
 
     solutionTime: 0,
@@ -40,7 +34,7 @@ function updateRound(state, round) {
         remaining: round.duration,
         input: '',
         expected: '',
-        phase: RoundPhase.IDLE,
+        phase: RoundPhases.IDLE,
         countdownRemaining: 0,
 
         solutionResult: '',
@@ -51,10 +45,10 @@ function updateRound(state, round) {
 
 function updateRoundPhase(state, phase) {
     switch (phase) {
-        case RoundPhase.IDLE:
-        case RoundPhase.COUNTDOWN:
-        case RoundPhase.IN_PROGRESS:
-        case RoundPhase.END:
+        case RoundPhases.IDLE:
+        case RoundPhases.COUNTDOWN:
+        case RoundPhases.IN_PROGRESS:
+        case RoundPhases.END:
             return Object.assign({}, state, { phase });
         default:
             error('Unknown round phase');
@@ -63,7 +57,7 @@ function updateRoundPhase(state, phase) {
 }
 
 function updateCountdown(state, countdownRemaining) {
-    if (state.phase !== RoundPhase.COUNTDOWN) {
+    if (state.phase !== RoundPhases.COUNTDOWN) {
         return state;
     }
 
