@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { bindActionCreators } from 'redux';
 import { connect } from 'preact-redux';
 
 import { switchScoreView } from '../../action-creators/view-state';
@@ -14,11 +13,13 @@ function getClasses(visibleScore) {
 }
 
 class ScoreViewSwitcher extends Component {
-    render({ dispatch, visibleScore }) {
+    render({ visibleScore, switchScoreView }) {
         return (
-            <button className={getClasses(visibleScore)} onClick={bindActionCreators(switchScoreView, dispatch)}></button>
+            <button className={getClasses(visibleScore)} onClick={switchScoreView}></button>
         );
     }
 }
 
-export default connect()(ScoreViewSwitcher);
+export default connect(null, {
+    switchScoreView,
+})(ScoreViewSwitcher);

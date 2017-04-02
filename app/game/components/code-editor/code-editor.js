@@ -35,6 +35,8 @@ export default class CodeEditor extends Component {
         this.codeEditor = CodeMirror.fromTextArea(this.textarea, config);
 
         this.codeEditor.on('change', this.boundOnChange);
+
+        this.codeEditor.getDoc().setValue(this.props.playerInput);
     }
 
     shouldComponentUpdate() {
@@ -49,7 +51,10 @@ export default class CodeEditor extends Component {
 
         if (this.props.currentRoundIndex !== nextProps.currentRoundIndex) {
             const doc = this.codeEditor.getDoc();
-            doc.setValue('');
+            doc.setValue(nextProps.playerInput || '');
+        } else if (this.codeEditor.getValue() !== nextProps.playerInput) {
+            const doc = this.codeEditor.getDoc();
+            doc.setValue(nextProps.playerInput);
         }
     }
 
