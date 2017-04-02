@@ -24,7 +24,7 @@ const MESSAGE_NAME = ui.MESSAGE_NAME;
 
 function formatStateMessage(message) {
     const { roundCountdown, startCountdown, roundPhase } = message;
-    const { input, expected, name } = message.puzzle;
+    const { input, expected, name, timeLimit } = message.puzzle;
     const { roundScore, aggregateScore } = message.score;
     const { puzzleIndex, puzzleCount, displayName } = message;
 
@@ -33,8 +33,9 @@ function formatStateMessage(message) {
             name,
             input,
             expected,
-            countdownRemaining: roundCountdown,
-            duration: startCountdown,
+            countdownRemaining: startCountdown,
+            duration: timeLimit,
+            remaining: roundCountdown,
             phase: roundPhase,
         },
         participant: {
