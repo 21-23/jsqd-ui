@@ -54,7 +54,7 @@ function formatStateMessage(message) {
 
 function getAction(message) {
     switch (message.name) {
-        case MESSAGE_NAME.sessionState:
+        case MESSAGE_NAME.gameMasterSessionState:
             return setSessionState(formatStateMessage(message));
         case MESSAGE_NAME.participantJoined:
             return addNewParticipant({

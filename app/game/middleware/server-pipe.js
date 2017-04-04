@@ -66,7 +66,7 @@ function getAction(message) {
             });
         case MESSAGE_NAME.roundCountdownChanged:
             return RoundActionsCreator.updateRemaining(message.roundCountdown);
-        case MESSAGE_NAME.sessionState:
+        case MESSAGE_NAME.playerSessionState:
             return setSessionState(formatStateMessage(message));
         default:
             return null;

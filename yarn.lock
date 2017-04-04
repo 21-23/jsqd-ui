@@ -3179,9 +3179,9 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
-message-factory@21-23/message-factory#v2.8.0:
-  version "2.8.0"
-  resolved "https://codeload.github.com/21-23/message-factory/tar.gz/fabaeb0d9eb807b4e08563178e70358c9cebc68a"
+message-factory@21-23/message-factory#v5.0.0:
+  version "5.0.0"
+  resolved "https://codeload.github.com/21-23/message-factory/tar.gz/253143c03c521b1e5251ae69561561985ed56c1d"
 
 methods@~1.1.2:
   version "1.1.2"
