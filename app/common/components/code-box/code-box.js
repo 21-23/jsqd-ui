@@ -27,9 +27,13 @@ export default class CodeBox extends Component {
         this.setCode(this.props.value);
     }
 
-    componentDidUpdate() {
-        if (this.value !== this.props.value) {
-            this.setCode(this.props.value);
+    shouldComponentUpdate() {
+        return false;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.value !== nextProps.value) {
+            this.setCode(nextProps.value);
         }
     }
 
@@ -46,21 +50,23 @@ export default class CodeBox extends Component {
     }
 
     setCode(value = '') {
-        this.value = Beautifier.js_beautify(this.formatValue(value));
+        this.value = value;
+
+        const formattedCode = this.formatValue(value);
+        this.setValue(Beautifier.js_beautify(formattedCode));
     }
 
-    get value() {
+    getValue() {
         return this.codeBox.getValue();
     }
 
-    set value(value) {
+    setValue(value) {
         this.codeBox.getDoc().setValue(value);
     }
 
     render() {
         return (
             <div className="code-box">
-                { /* preact doesn't support refs */}
                 <textarea readOnly ref={ component => this.textarea = component }/>
             </div>
         );
