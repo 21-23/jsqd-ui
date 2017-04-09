@@ -1,5 +1,7 @@
 const path = require('path');
 
+const WebpackNotifierPlugin = require('webpack-notifier');
+
 const webpackMerge = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.base.js');
@@ -14,5 +16,8 @@ module.exports = function(env) {
             port: 8082,
             host: '0.0.0.0'
         },
+        plugins: [
+            new WebpackNotifierPlugin(),
+        ]
     });
 };

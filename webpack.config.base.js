@@ -1,7 +1,6 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
@@ -26,12 +25,15 @@ module.exports = {
                 test: /\.js?$/,
                 include: [
                     path.resolve(__dirname, 'app'),
+                    path.resolve(__dirname, 'node_modules', 'message-factory'),
+                    path.resolve(__dirname, 'node_modules', 'steno'),
+                    path.resolve(__dirname, 'node_modules', 'phoenix'),
                 ],
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['es2015']
+                            presets: [['es2015', { modules: false }]]
                         }
                     }
                 ]
@@ -81,7 +83,6 @@ module.exports = {
         }
     },
     plugins: [
-        new WebpackNotifierPlugin(),
         new FaviconsWebpackPlugin({
             logo: 'common/img/logo.png',
             persistentCache: true,
