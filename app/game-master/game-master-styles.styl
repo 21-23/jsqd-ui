@@ -1,7 +1,7 @@
 @import '~common/styles/color-palette.styl'
 @import '~common/styles/code-colors.styl'
 
-scroll-width = 5px
+scroll-width = 1%
 
 html
     min-height 100%
@@ -123,12 +123,12 @@ html
 
             &.-aggregate
                 .round-score
-                    transform translateX(-100% - scroll-width)
+                    transform translateX(-100%)
                 .aggregate-score
                     transform translateX(0)
 
 .list-container
-    padding-right scroll-width
+    padding scroll-width
 
 ::-webkit-scrollbar-track
     background-color transparent
