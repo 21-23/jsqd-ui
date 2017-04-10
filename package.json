@@ -6,12 +6,13 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.dev.js",
-    "build:prod": "webpack --config webpack.config.prod.js",
+    "build:prod": "npm run clean:prod && webpack --config webpack.config.prod.js",
     "build:local": "webpack --config webpack.config.local.js",
     "watch": "cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch",
     "watch:local": "cross-env NODE_ENV=development webpack --config webpack.config.local.js --watch",
     "lint": "eslint ./app && stylint ./app",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "clean:prod": "rm -rf dist-prod"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
