@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import CodeMirror from 'codemirror';
-import Beautifier from 'js-beautify';
+import { js_beautify as beautify } from 'js-beautify';
 
 import 'codemirror/lib/codemirror.css';
 import 'common/styles/code-theme.styl';
@@ -8,22 +8,34 @@ import './code-box.styl';
 
 //imports specific language mode for code-box
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/scroll/simplescrollbars';
+
+const BEAUTIFYER_DEFAULT_CONFIG = {
+    indent_size: 4,
+    indent_char: " ",
+    indent_with_tabs: false,
+    //wrap_line_length: 80, //WTF with primitive arrays formatting
+};
+
+const CODE_BOX_DEFAULT_CONFIG = {
+    mode: 'javascript',
+    handleMouseEvents: false,
+    scrollbarStyle: "overlay",
+    lint: true,
+    indentUnit: 4,
+    readOnly: true,
+    lineNumbers: false,
+    theme: 'lodash',
+};
 
 export default class CodeBox extends Component {
     componentDidMount() {
-        const config = {
-            mode: 'javascript',
-            handleMouseEvents: false,
-            scrollbarStyle: null,
-            lint: true,
-            indentUnit: 4,
-            readOnly: true,
-            lineNumbers: false,
-            theme: 'lodash',
-        };
-        Object.assign(config, this.props.config);
+        const { config = {}, beautifyerConfig = {} } = this.props;
+        const codeBoxOptions = Object.assign({}, CODE_BOX_DEFAULT_CONFIG, config);
 
-        this.codeBox = CodeMirror.fromTextArea(this.textarea, config);
+        this.beautifyerOptions = Object.assign({}, BEAUTIFYER_DEFAULT_CONFIG, beautifyerConfig);
+        this.codeBox = CodeMirror.fromTextArea(this.textarea, codeBoxOptions);
+
         this.setCode(this.props.value);
     }
 
@@ -53,7 +65,7 @@ export default class CodeBox extends Component {
         this.value = value;
 
         const formattedCode = this.formatValue(value);
-        this.setValue(Beautifier.js_beautify(formattedCode));
+        this.setValue(beautify(formattedCode, this.beautifyerOptions));
     }
 
     getValue() {
