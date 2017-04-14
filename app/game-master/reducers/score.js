@@ -13,6 +13,33 @@ const defaultParticipant = {
     correct: false,
 };
 
+function formatRoundScore(players) {
+    return players.map(({ participantId, displayName, inputLength, solution }) => {
+        let correct = false;
+        let time = null;
+
+        if (solution) {
+            correct = solution.correct;
+            time = solution.time;
+        }
+
+        return { participantId, displayName, length: inputLength, correct, time };
+    });
+}
+
+function formatAggregateScore(players) {
+    return players.map(({ participantId, displayName, aggregateScore }) => {
+        return { participantId, displayName, time: aggregateScore };
+    });
+}
+
+function updateScores(state, { players }) {
+    return Object.assign({}, state, {
+        round: formatRoundScore(players),
+        aggregate: formatAggregateScore(players),
+    });
+}
+
 function addNewParticipant(state, participant) {
     const newParticipant = Object.assign({}, defaultParticipant, participant);
 
@@ -46,7 +73,7 @@ function updateParticipantRoundScore(state, participantData) {
 export default function participant(state = defaultState, action) {
     switch (action.type) {
         case SESSION_STATE:
-            return Object.assign({}, state, action.payload.score);
+            return updateScores(state, action.payload.score);
         case PARTICIPANT_JOINED:
             return addNewParticipant(state, action.payload);
         case PARTICIPANT_LEFT:
