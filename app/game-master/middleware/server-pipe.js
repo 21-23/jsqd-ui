@@ -23,9 +23,8 @@ const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
 
 function formatStateMessage(message) {
-    const { roundCountdown, startCountdown, roundPhase } = message;
+    const { roundCountdown, startCountdown, roundPhase, players } = message;
     const { input, expected, name, timeLimit } = message.puzzle;
-    const { roundScore, aggregateScore } = message.score;
     const { puzzleIndex, puzzleCount, displayName } = message;
 
     return {
@@ -42,8 +41,7 @@ function formatStateMessage(message) {
             displayName,
         },
         score: {
-            round: roundScore,
-            aggregate: aggregateScore,
+            players,
         },
         session: {
             currentRoundIndex: puzzleIndex,
