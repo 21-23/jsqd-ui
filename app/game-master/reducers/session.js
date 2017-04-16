@@ -4,15 +4,9 @@ import { SESSION_STATE } from '../actions/session';
 
 const defaultState = {
     connected: false,
-    currentRoundIndex: 3,
+    currentRoundIndex: 0,
     selectedRoundIndex: 0,
-    puzzles: [
-        { name: 'Puzzle 0' },
-        { name: 'Puzzle 1' },
-        { name: 'Puzzle 2' },
-        { name: 'Puzzle 3' },
-        { name: 'Puzzle 4' },
-    ]
+    puzzles: [],
 };
 
 function updatePuzzlesList(state, session) {

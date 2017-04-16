@@ -2,17 +2,17 @@ import { error } from 'steno';
 
 import * as RoundActions from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
+import { RoundPhases } from 'common/constants/round';
 
-import MockData from '../mock-data/current-round';
-
-const RoundPhase = {
-    IDLE: 'idle',
-    COUNTDOWN: 'countdown',
-    IN_PROGRESS: 'in-progress',
-    END: 'end'
+const defaultState = {
+    name: '',
+    duration: 0,
+    remaining: 0,
+    input: '',
+    expected: '',
+    phase: RoundPhases.IDLE,
+    countdownRemaining: 0,
 };
-
-const defaultState = MockData;
 
 function updateRound(state, round) {
     return Object.assign({}, state, {
@@ -21,7 +21,7 @@ function updateRound(state, round) {
         remaining: round.duration,
         input: '',
         expected: '',
-        phase: RoundPhase.IDLE,
+        phase: RoundPhases.IDLE,
         countdownRemaining: 0,
 
         solutionResult: '',
@@ -32,10 +32,10 @@ function updateRound(state, round) {
 
 function updateRoundPhase(state, phase) {
     switch (phase) {
-        case RoundPhase.IDLE:
-        case RoundPhase.COUNTDOWN:
-        case RoundPhase.IN_PROGRESS:
-        case RoundPhase.END:
+        case RoundPhases.IDLE:
+        case RoundPhases.COUNTDOWN:
+        case RoundPhases.IN_PROGRESS:
+        case RoundPhases.END:
             return Object.assign({}, state, { phase });
         default:
             error('Unknown round phase');
@@ -44,7 +44,7 @@ function updateRoundPhase(state, phase) {
 }
 
 function updateCountdown(state, countdownRemaining) {
-    if (state.phase !== RoundPhase.COUNTDOWN) {
+    if (state.phase !== RoundPhases.COUNTDOWN) {
         return state;
     }
 

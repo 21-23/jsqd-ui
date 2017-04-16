@@ -1,4 +1,3 @@
-import MockData from '../mock-data/score';
 import {
     PARTICIPANT_JOINED,
     PARTICIPANT_LEFT,
@@ -6,7 +5,10 @@ import {
 import { PARTICIPANT_SOLUTION } from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
 
-const defaultState = MockData;
+const defaultState = {
+    round: [],
+    aggregate: [],
+};
 const defaultParticipant = {
     time: null,
     length: 0,

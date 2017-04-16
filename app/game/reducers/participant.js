@@ -1,8 +1,9 @@
 import { SESSION_STATE } from '../actions/session';
+import { Roles } from 'common/constants/participant';
 
 const defaultState = {
     displayName: '', // Player',
-    role: 'player', // role can't be changed (at least now)
+    role: Roles.PLAYER, // role can't be changed (at least now)
 };
 
 function updateParticipantInfo(state, participant) {
