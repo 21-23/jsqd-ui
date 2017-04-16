@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app/index.js",
   "license": "LGPL-3.0",
+  "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.dev.js",
