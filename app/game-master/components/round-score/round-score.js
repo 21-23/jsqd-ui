@@ -1,5 +1,7 @@
 import { h } from 'preact';
 
+import { formatScoreTime } from 'common/utils/formatters';
+
 import './round-score.styl';
 
 function generateEntries(score) {
@@ -11,7 +13,7 @@ function generateEntries(score) {
         return (
             <div key={entry.participantId} className={rootClasses}>
                 <div className="-name">{entry.displayName}</div>
-                <div className="-time">{entry.time || ''}</div>
+                <div className="-time">{formatScoreTime(entry.time)}</div>
                 <div className="-length">{entry.length}</div>
             </div>
         );

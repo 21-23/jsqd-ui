@@ -1,5 +1,7 @@
 import { h } from 'preact';
 
+import { formatScoreTime } from 'common/utils/formatters';
+
 import './aggregate-score.styl';
 
 function generateEntries(score) {
@@ -11,7 +13,7 @@ function generateEntries(score) {
             <div key={entry.participantId} className={rootClasses}>
                 <div className="-position">{index + 1}</div>
                 <div className="-name">{entry.displayName}</div>
-                <div className="-time">{entry.time || ''}</div>
+                <div className="-time">{formatScoreTime(entry.time)}</div>
             </div>
         );
     });
