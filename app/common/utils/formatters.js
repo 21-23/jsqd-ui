@@ -1,5 +1,5 @@
-export function formatScoreTime(time) {
-    if (typeof time !== 'number') {
+export function formatScoreTime(time, getDefault = false) {
+    if (getDefault || typeof time !== 'number') {
         return '';
     }
 

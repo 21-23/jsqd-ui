@@ -13,7 +13,7 @@ function generateEntries(score) {
         return (
             <div key={entry.participantId} className={rootClasses}>
                 <div className="-name">{entry.displayName}</div>
-                <div className="-time">{formatScoreTime(entry.time)}</div>
+                <div className="-time">{formatScoreTime(entry.time, !entry.correct)}</div>
                 <div className="-length">{entry.length}</div>
             </div>
         );
