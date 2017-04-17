@@ -39,7 +39,20 @@ function updateRound(state, round) {
 
         solutionResult: '',
         solutionTime: 0,
-        correct: false
+        correct: false,
+        playerInput: '',
+    });
+}
+
+function cleanRoundState(state) {
+    return Object.assign({}, state, {
+        input: '',
+        expected: '',
+
+        solutionResult: '',
+        solutionTime: 0,
+        correct: false,
+        playerInput: '',
     });
 }
 
@@ -47,6 +60,8 @@ function updateRoundPhase(state, phase) {
     switch (phase) {
         case RoundPhases.IDLE:
         case RoundPhases.COUNTDOWN:
+            // TODO: use cleanRoundState and updateRound as handlers of roundPhase change (to RoundPhases.IDLE)
+            return Object.assign({}, state, cleanRoundState(state), { phase });
         case RoundPhases.IN_PROGRESS:
         case RoundPhases.END:
             return Object.assign({}, state, { phase });

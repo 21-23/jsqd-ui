@@ -56,17 +56,13 @@ export default class CodeEditor extends Component {
         const {
             isReadOnly,
             playerInput,
-            currentRoundIndex,
         } = nextProps;
 
         if (this.props.isReadOnly !== isReadOnly) {
             this.setReadOnly(isReadOnly);
         }
 
-        if (this.props.currentRoundIndex !== currentRoundIndex) {
-            const doc = this.codeEditor.getDoc();
-            doc.setValue(playerInput || '');
-        } else if (this.codeEditor.getValue() !== playerInput) {
+        if (this.codeEditor.getValue() !== playerInput) {
             const doc = this.codeEditor.getDoc();
             doc.setValue(playerInput);
         }
