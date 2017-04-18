@@ -18,6 +18,7 @@ import {
     updateCountdown
 } from '../action-creators/round';
 import { setSessionState } from '../action-creators/session';
+import { updateScore } from '../action-creators/score';
 
 const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
@@ -85,6 +86,8 @@ function getAction(message) {
             });
         case MESSAGE_NAME.roundPhaseChanged:
             return updateRoundPhase(message.roundPhase);
+        case MESSAGE_NAME.score:
+            return updateScore(message.players);
         case MESSAGE_NAME.startCountdownChanged:
             return updateCountdown(message.startCountdown);
         default:
