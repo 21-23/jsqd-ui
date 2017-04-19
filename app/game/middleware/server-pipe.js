@@ -15,17 +15,13 @@ const { parseMessage, protocol: { frontService, ui } } = messageFactory;
 const MESSAGE_NAME = ui.MESSAGE_NAME;
 
 function formatStateMessage(message) {
-    const { roundCountdown, startCountdown, roundPhase } = message;
-    const { input, expected, name, timeLimit } = message.puzzle;
+    const { roundCountdown, startCountdown, roundPhase, puzzle } = message;
     const { puzzleIndex, puzzleCount, displayName, playerInput } = message;
 
     return {
         round: {
-            name,
-            input,
-            expected,
+            puzzle,
             countdownRemaining: startCountdown,
-            duration: timeLimit,
             remaining: roundCountdown,
             phase: roundPhase,
             playerInput,

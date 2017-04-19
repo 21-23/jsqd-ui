@@ -95,7 +95,21 @@ function updatePlayerInput(state, playerInput) {
 }
 
 function updateRoundState(state, roundState) {
-    return Object.assign({}, state, roundState);
+    const round = Object.assign({}, defaultState);
+
+    round.countdownRemaining = roundState.countdownRemaining;
+    round.remaining = roundState.remaining;
+    round.phase = roundState.phase;
+    round.playerInput = roundState.playerInput || defaultState.playerInput;
+
+    if (roundState.puzzle) {
+        round.name = roundState.puzzle.name || defaultState.name;
+        round.duration = roundState.puzzle.timeLimit || defaultState.duration;
+        round.input = roundState.puzzle.input || defaultState.input;
+        round.expected = roundState.puzzle.expected || defaultState.expected;
+    }
+
+    return Object.assign({}, state, round);
 }
 
 export default function currentRound(state = defaultState, action) {

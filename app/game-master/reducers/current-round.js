@@ -62,10 +62,27 @@ function updateRemaining(state, remaining) {
     return Object.assign({}, state, { remaining });
 }
 
+function updateRoundState(state, roundState) {
+    const round = Object.assign({}, defaultState);
+
+    round.countdownRemaining = roundState.countdownRemaining;
+    round.remaining = roundState.remaining;
+    round.phase = roundState.phase;
+
+    if (roundState.puzzle) {
+        round.name = roundState.puzzle.name || defaultState.name;
+        round.duration = roundState.puzzle.timeLimit || defaultState.duration;
+        round.input = roundState.puzzle.input || defaultState.input;
+        round.expected = roundState.puzzle.expected || defaultState.expected;
+    }
+
+    return Object.assign({}, state, round);
+}
+
 export default function currentRound(state = defaultState, action) {
     switch(action.type) {
         case SESSION_STATE:
-            return Object.assign({}, state, action.payload.round);
+            return updateRoundState(state, action.payload.round);
         case RoundActions.CURRENT_ROUND:
             return updateRound(state, action.payload);
         case RoundActions.ROUND_PHASE:
