@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import CodeMirror from 'codemirror';
 import { isNewLineEvent, isValidSymbol } from './helpers';
+import config from '../../config.json';
 
 //imports specific language mode for codeEditor
 import 'codemirror/mode/javascript/javascript';
@@ -13,11 +14,14 @@ import 'codemirror/addon/hint/show-hint.css';
 import 'common/styles/code-theme.styl';
 import './code-editor.styl';
 
+const TEXT_LIMIT = config['user-input']['limit'] || Infinity;
+
 //TODO: Fix autocomplete issues
 export default class CodeEditor extends Component {
     constructor(props) {
         super(props);
         this.boundOnChange = this.onChange.bind(this);
+        this.boundOnBeforeChange = this.onBeforeChange.bind(this);
     }
 
     componentDidMount() {
@@ -35,6 +39,7 @@ export default class CodeEditor extends Component {
 
         this.codeEditor = CodeMirror.fromTextArea(this.textarea, selectedConfig);
         this.codeEditor.on('change', this.boundOnChange);
+        this.codeEditor.on('beforeChange', this.boundOnBeforeChange);
         this.codeEditor.getDoc().setValue(playerInput);
         this.setReadOnly(isReadOnly);
     }
@@ -52,15 +57,19 @@ export default class CodeEditor extends Component {
         }
     }
 
+    limitInput(input) {
+        return input.substring(0, TEXT_LIMIT);
+    }
+
     componentWillReceiveProps(nextProps) {
-        const {
-            isReadOnly,
-            playerInput,
-        } = nextProps;
+        const { isReadOnly } = nextProps;
+        let { playerInput } = nextProps;
 
         if (this.props.isReadOnly !== isReadOnly) {
             this.setReadOnly(isReadOnly);
         }
+
+        playerInput = this.limitInput(playerInput);
 
         if (this.codeEditor.getValue() !== playerInput) {
             const doc = this.codeEditor.getDoc();
@@ -70,6 +79,7 @@ export default class CodeEditor extends Component {
 
     componentWillUnmount() {
         this.codeEditor.off('change', this.boundOnChange);
+        this.codeEditor.off('beforeChange', this.boundOnBeforeChange);
         this.boundOnChange = null;
         this.codeEditor = null;
     }
@@ -86,6 +96,15 @@ export default class CodeEditor extends Component {
 
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(value, event);
+        }
+    }
+
+    onBeforeChange(editor, event) {
+        const valueLength = editor.getValue().length;
+        const textLength = event.text.join(editor.lineSeparator()).length;
+
+        if ((valueLength + textLength) > TEXT_LIMIT) {
+            event.canceled = true;
         }
     }
 

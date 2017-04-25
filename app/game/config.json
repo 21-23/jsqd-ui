@@ -2,5 +2,8 @@
     "server-endpoint": {
         "uri": "${protocol}//${hostname}:3001/",
         "timeout": 500
+    },
+    "user-input": {
+        "limit": 512
     }
 }
