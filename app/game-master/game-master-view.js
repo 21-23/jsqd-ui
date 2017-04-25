@@ -10,7 +10,7 @@ import GameMasterApp from './components/GameMasterApp';
 
 import store from './store/store';
 
-initSteno('ui-game-master', 'all');
+initSteno('ui-game-master');
 
 render((
     <Provider store={store}>

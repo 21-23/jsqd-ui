@@ -10,7 +10,7 @@ import GameApp from './components/GameApp';
 
 import store from './store/store';
 
-initSteno('ui-game', 'all');
+initSteno('ui-game');
 
 render((
     <Provider store={store}>

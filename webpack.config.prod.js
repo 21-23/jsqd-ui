@@ -16,7 +16,8 @@ module.exports = function(env) {
         plugins: [
             new webpack.DefinePlugin({
                 'process.env': {
-                    'NODE_ENV': JSON.stringify('production')
+                    'NODE_ENV': JSON.stringify('production'),
+                    'LOG_LEVEL': JSON.stringify('+error,-warn,-info,-log,+perf')
                 }
             }),
             new webpack.LoaderOptionsPlugin({

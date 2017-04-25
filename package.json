@@ -5,12 +5,12 @@
   "license": "LGPL-3.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.dev.js",
+    "start": "cross-env NODE_ENV=development LOG_LEVEL=all webpack-dev-server --config webpack.config.dev.js",
+    "build": "cross-env LOG_LEVEL=all webpack --config webpack.config.dev.js",
     "build:prod": "npm run clean:prod && webpack --config webpack.config.prod.js",
-    "build:local": "webpack --config webpack.config.local.js",
-    "watch": "cross-env NODE_ENV=development webpack --config webpack.config.dev.js --watch",
-    "watch:local": "cross-env NODE_ENV=development webpack --config webpack.config.local.js --watch",
+    "build:local": "cross-env LOG_LEVEL=all webpack --config webpack.config.local.js",
+    "watch": "cross-env NODE_ENV=development LOG_LEVEL=all webpack --config webpack.config.dev.js --watch",
+    "watch:local": "cross-env NODE_ENV=development LOG_LEVEL=all webpack --config webpack.config.local.js --watch",
     "lint": "eslint ./app && stylint ./app",
     "precommit": "lint-staged",
     "clean:prod": "rm -rf dist-prod"
