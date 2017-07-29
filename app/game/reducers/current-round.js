@@ -3,6 +3,7 @@ import { error } from 'steno';
 import * as RoundActions from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
 import { RoundPhases } from 'common/constants/round';
+import { SolutionCorrect } from 'common/constants/solution';
 
 const defaultState = {
     name: '', // Current round',
@@ -15,7 +16,7 @@ const defaultState = {
 
     solutionTime: 0,
     solutionResult: '',
-    correct: false,
+    correct: SolutionCorrect.INCORRECT,
     playerInput: '',
 };
 
@@ -39,7 +40,7 @@ function updateRound(state, round) {
 
         solutionResult: '',
         solutionTime: 0,
-        correct: false,
+        correct: SolutionCorrect.INCORRECT,
         playerInput: '',
     });
 }
@@ -51,7 +52,7 @@ function cleanRoundState(state) {
 
         solutionResult: '',
         solutionTime: 0,
-        correct: false,
+        correct: SolutionCorrect.INCORRECT,
         playerInput: '',
     });
 }

@@ -22,11 +22,7 @@ function updateRound(state, round) {
         input: '',
         expected: '',
         phase: RoundPhases.IDLE,
-        countdownRemaining: 0,
-
-        solutionResult: '',
-        solutionTime: 0,
-        correct: false
+        countdownRemaining: 0
     });
 }
 

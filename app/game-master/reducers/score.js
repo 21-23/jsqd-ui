@@ -7,6 +7,7 @@ import { SESSION_STATE } from '../actions/session';
 import { SCORE } from '../actions/score';
 
 import { RoundPhases } from 'common/constants/round';
+import { SolutionCorrect } from 'common/constants/solution';
 
 const defaultState = {
     round: [],
@@ -15,12 +16,12 @@ const defaultState = {
 const defaultParticipant = {
     time: null,
     length: 0,
-    correct: false,
+    correct: SolutionCorrect.INCORRECT,
 };
 
 function formatRoundScore(players) {
     return players.map(({ participantId, displayName, inputLength, solution }) => {
-        let correct = false;
+        let correct = SolutionCorrect.INCORRECT;
         let time = null;
 
         if (solution) {

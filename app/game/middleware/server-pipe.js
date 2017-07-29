@@ -4,6 +4,7 @@ import { error, warn, log } from 'steno';
 
 import config from '../config.json';
 import { buildEndpointUri } from 'common/utils/connection';
+import { SolutionCorrect } from 'common/constants/solution';
 
 import * as RoundActions from '../actions/round';
 
@@ -85,7 +86,7 @@ function handleClientSolution(phoenix, userInput) {
         return RoundActionsCreator.updateSolutionResult({
             error: null,
             result: '',
-            correct: false,
+            correct: SolutionCorrect.INCORRECT,
             time: 0,
         });
     }

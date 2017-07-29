@@ -1,6 +1,7 @@
 import { h } from 'preact';
 
 import { formatScoreTime } from 'common/utils/formatters';
+import { SolutionCorrect } from 'common/constants/solution';
 
 import './round-score.styl';
 
@@ -8,12 +9,13 @@ function generateEntries(score) {
     return score.map((entry) => {
         const rootClasses = {
             'score-entry': true,
-            '-solved': entry.correct
+            '-solved': entry.correct === SolutionCorrect.CORRECT,
+            '-partial': entry.correct === SolutionCorrect.PARTIAL,
         };
         return (
             <div key={entry.participantId} className={rootClasses}>
                 <div className="-name">{entry.displayName}</div>
-                <div className="-time">{formatScoreTime(entry.time, !entry.correct)}</div>
+                <div className="-time">{formatScoreTime(entry.time, (entry.correct === SolutionCorrect.INCORRECT))}</div>
                 <div className="-length">{entry.length}</div>
             </div>
         );
@@ -26,7 +28,7 @@ function getJoinedCount(score) {
 
 function getSolvedCount(score) {
     return score.reduce((solved, entry) => {
-        if (entry.correct) {
+        if (entry.correct === SolutionCorrect.CORRECT) {
             return solved + 1;
         }
 

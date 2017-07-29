@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
+import { SolutionCorrect } from 'common/constants/solution';
 import CodeBox from 'common/components/code-box/code-box';
 import CodeEditor from '../code-editor/code-editor';
 
@@ -16,7 +17,7 @@ class GameInput extends Component {
                 <CodeEditor
                     onChange={verifySolution}
                     playerInput={playerInput}
-                    isReadOnly={correct || phase !== RoundPhases.IN_PROGRESS}
+                    isReadOnly={(correct === SolutionCorrect.CORRECT) || phase !== RoundPhases.IN_PROGRESS}
                 />
                 <div className="separator"></div>
                 <CodeBox value={result} />
