@@ -88,6 +88,11 @@ function updatePuzzle(state, puzzle) {
 }
 
 function updateRemaining(state, remaining) {
+    if (state.correct === SolutionCorrect.CORRECT) {
+        // freeze timer on correct solution
+        return state;
+    }
+
     return Object.assign({}, state, { remaining });
 }
 

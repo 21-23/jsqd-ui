@@ -3,7 +3,7 @@ import { h } from 'preact';
 import './timer.styl';
 
 function formatValue(value) {
-    let seconds = value;
+    let seconds = ~~value;
     const minutes = seconds >= 60 ? ((seconds / 60) | 0) : 0;
 
     seconds = seconds - (60 * minutes);
@@ -18,14 +18,28 @@ function calculateDashArray(value, maxValue, maxDashArray) {
     return maxDashArray - Math.round(remainingPercent * maxDashArray);
 }
 
-export default function Timer({ value, maxValue, radius, strokeWidth }) {
+function getRootClasses(cssClasses) {
+    const result = {
+        timer: true
+    };
+
+    if (cssClasses) {
+        cssClasses.forEach((cssClass) => {
+            result[cssClass] = true;
+        });
+    }
+
+    return result;
+}
+
+export default function Timer({ value, maxValue, radius, strokeWidth, cssClasses }) {
     const size = 2 * (radius + strokeWidth);
     const sizePx = `${size}px`;
     const centerCoord = size / 2;
     const maxDashArray = Math.round(2 * Math.PI * radius);
 
     return (
-        <div className="timer" style={{ width: sizePx, height: sizePx }}>
+        <div className={getRootClasses(cssClasses)} style={{ width: sizePx, height: sizePx }}>
             <div className="time-text">{formatValue(value)}</div>
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className="circle-container">
                 <circle

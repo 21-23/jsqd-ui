@@ -1,5 +1,5 @@
 export const SolutionCorrect = {
     CORRECT: 'correct',
-    INCORRECT: 'incorect',
+    INCORRECT: 'incorrect',
     PARTIAL: 'partial'
 };
