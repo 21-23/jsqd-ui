@@ -1,5 +1,7 @@
+@import '~common/fonts/families.styl'
 @import '~common/styles/color-palette.styl'
 @import '~common/styles/code-colors.styl'
+@import '~common/styles/common.styl'
 
 scroll-width = 1%
 
@@ -20,6 +22,7 @@ html
         flex-direction column
         justify-content center
         position relative
+        overflow hidden
 
         .score-view-switcher
             width 1.8vw
@@ -126,6 +129,28 @@ html
                     transform translateX(-100%)
                 .aggregate-score
                     transform translateX(0)
+
+    .participant-input-pop-up
+        background background-blue-0
+        border-radius 3px
+        border 2px solid secondary-action-border-color
+
+        .close-pop-up
+            rounded-icon-button()
+            background transparent
+            position absolute
+            right .3em
+            top .3em
+            padding 0
+            width 2em
+            height 2em
+
+            &:hover
+                cursor pointer
+
+            &:before
+                content '\f00d'
+                margin 0
 
 .list-container
     padding scroll-width

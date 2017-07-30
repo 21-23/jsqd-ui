@@ -80,6 +80,8 @@ module.exports = {
     resolve: {
         alias: {
             'common': path.resolve(__dirname, 'app/common'),
+            'react': 'preact-compat',
+            'react-dom': 'preact-compat',
         }
     },
     plugins: [

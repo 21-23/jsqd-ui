@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
+import Rnd from 'react-rnd';
 
 import UserPanel from 'common/components/user-panel/user-panel';
 
@@ -9,8 +10,17 @@ import RoundScore from './round-score/round-score';
 import AggregateScore from './aggregate-score/aggregate-score';
 import ScoreViewSwitcher from './score-view-switcher/score-view-switcher';
 import TaskColumn from './task-column/task-column';
+import ParticipantInput from './participant-input/participant-input';
 
 import { selectRound } from '../action-creators/round';
+import { closeParticipantInputPopUp } from '../action-creators/view-state';
+
+const RND_DEFAULT = {
+    x: 100,
+    y: 0,
+    width: 500,
+    height: 300,
+};
 
 function chooseOverlay(connected) {
     if (!connected) {
@@ -27,8 +37,32 @@ function getScoresClasses(visibleScore) {
     };
 }
 
+function renderParticipantInputPopUps(popUps, closeParticipantInputPopUp) {
+    return popUps.map((popUp, index) => {
+        const rndDefault = Object.assign({}, RND_DEFAULT, {
+            y: RND_DEFAULT.y + 40 * index,
+            x: RND_DEFAULT.x + 40 * index,
+        });
+
+        return (
+            <Rnd
+                default={rndDefault}
+                minWidth={200}
+                minHeight={120}
+                key={popUp.participantId}
+                className="participant-input-pop-up"
+                // TODO: codeBox.refresh();
+                // onResize={() => { ??? }}
+            >
+                <button className="close-pop-up" onClick={() => { closeParticipantInputPopUp(popUp.participantId); }}></button>
+                <ParticipantInput input={popUp} />
+            </Rnd>
+        );
+    });
+}
+
 class GameMasterApp extends Component {
-    render({ participant, session, currentRound, score, visibleScore, selectRound }) {
+    render({ participant, session, currentRound, score, visibleScore, participantPopUps, selectRound, closeParticipantInputPopUp }) {
         const {
             connected,
             puzzles,
@@ -56,6 +90,7 @@ class GameMasterApp extends Component {
                         </div>
                     </div>
                     <ScoreViewSwitcher visibleScore={visibleScore} />
+                    {renderParticipantInputPopUps(participantPopUps, closeParticipantInputPopUp)}
                 </div>
                 {overlay}
             </div>
@@ -70,7 +105,9 @@ export default connect((state) => {
         currentRound: state.currentRound,
         score: state.score,
         visibleScore: state.viewState.visibleScore,
+        participantPopUps: state.participantPopUps,
     };
 }, {
     selectRound,
+    closeParticipantInputPopUp,
 })(GameMasterApp);

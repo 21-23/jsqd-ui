@@ -1,0 +1,28 @@
+@import '~common/styles/color-palette.styl'
+
+.participant-input
+    display flex
+    flex-flow column nowrap
+    height 100%
+
+    .participant-input-header
+        color holy-white
+        border-bottom 1px solid super-light-blue
+        line-height 2em
+        padding 0 .3em
+
+        .participant-input-correct
+            font-weight lighter
+
+            &.-correct
+                color winning-green
+            &.-partial
+                color partial-cheater
+
+
+    .participant-input-body
+        height 100%
+        display flex
+
+        .code-box
+            width 100%

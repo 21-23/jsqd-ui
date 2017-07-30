@@ -23,13 +23,15 @@ function formatRoundScore(players) {
     return players.map(({ participantId, displayName, inputLength, solution }) => {
         let correct = SolutionCorrect.INCORRECT;
         let time = null;
+        let code = '';
 
         if (solution) {
             correct = solution.correct;
             time = solution.time;
+            code = solution.code;
         }
 
-        return { participantId, displayName, length: inputLength, correct, time };
+        return { participantId, displayName, length: inputLength, correct, time, code };
     });
 }
 
