@@ -114,7 +114,9 @@ export default class CodeEditor extends Component {
 
         return (
             <div ref={ elem => this.wrapper = elem } className={editorClass}>
+                <div className="hint start">_.chain(task).</div>
                 <textarea ref={ elem => this.textarea = elem } readOnly/>
+                <div className="hint end">.value()</div>
             </div>
 
         );
