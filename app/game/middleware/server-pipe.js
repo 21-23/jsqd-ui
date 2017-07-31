@@ -80,15 +80,15 @@ function handleServerMessage(message, dispatch) {
     }
 }
 
-function handleClientSolution(phoenix, userInput) {
+function handleClientSolution(phoenix, userInput, dispatch) {
     if (!userInput) {
         // if user input is empty - emulate empty solution
-        return RoundActionsCreator.updateSolutionResult({
+        return dispatch(RoundActionsCreator.updateSolutionResult({
             error: null,
             result: '',
             correct: SolutionCorrect.INCORRECT,
             time: 0,
-        });
+        }));
     }
 
     return phoenix.send(frontService.solution(userInput));
@@ -97,7 +97,7 @@ function handleClientSolution(phoenix, userInput) {
 function handleClientAction(action, phoenix, dispatch, getState) {
     switch (action.type) {
         case RoundActions.SOLUTION:
-            return handleClientSolution(phoenix, action.payload);
+            return handleClientSolution(phoenix, action.payload, dispatch);
         default:
             return log('Skip action reaction:', action.type);
     }
