@@ -4,3 +4,4 @@ yarn-error.log
 dist
 dist-prod
 .idea/
+.DS_Store
