@@ -9,7 +9,7 @@ function closePopUp(state, participantId) {
 }
 
 function openPopUp(state, popUp) {
-    return state.concat([popUp]);
+    return closePopUp(state, popUp.participantId).concat([popUp]);
 }
 
 export default function participantPopUp(state = defaultState, action) {
