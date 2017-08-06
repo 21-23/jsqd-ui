@@ -94,7 +94,7 @@ export default class CodeEditor extends Component {
             CodeMirror.commands.autocomplete(editor, null, { completeSingle: false });
         }
 
-        if (typeof this.props.onChange === 'function') {
+        if (typeof this.props.onChange === 'function' && !editor.getOption('readOnly')) {
             this.props.onChange(value, event);
         }
     }

@@ -17,7 +17,7 @@ const MESSAGE_NAME = ui.MESSAGE_NAME;
 
 function formatStateMessage(message) {
     const { roundCountdown, startCountdown, roundPhase, puzzle } = message;
-    const { puzzleIndex, puzzleCount, displayName, playerInput } = message;
+    const { puzzleIndex, puzzleCount, displayName, playerInput, solution } = message;
 
     return {
         round: {
@@ -26,6 +26,7 @@ function formatStateMessage(message) {
             remaining: roundCountdown,
             phase: roundPhase,
             playerInput,
+            solution: solution ? Object.assign({}, solution) : null,
         },
         participant: {
             displayName,

@@ -20,12 +20,16 @@ const defaultState = {
     playerInput: '',
 };
 
-function updateSolution(state, solution) {
-    return Object.assign({}, state, {
+function formatSolution(solution) {
+    return {
         solutionResult: solution.error || solution.result,
         solutionTime: solution.time,
         correct: solution.correct,
-    });
+    };
+}
+
+function updateSolution(state, solution) {
+    return Object.assign({}, state, formatSolution(solution));
 }
 
 function updateRound(state, round) {
@@ -113,6 +117,10 @@ function updateRoundState(state, roundState) {
         round.duration = roundState.puzzle.timeLimit || defaultState.duration;
         round.input = roundState.puzzle.input || defaultState.input;
         round.expected = roundState.puzzle.expected || defaultState.expected;
+    }
+
+    if (roundState.solution) {
+        Object.assign(round, formatSolution(roundState.solution));
     }
 
     return Object.assign({}, state, round);
