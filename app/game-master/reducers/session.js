@@ -4,8 +4,8 @@ import { SESSION_STATE } from '../actions/session';
 
 const defaultState = {
     connected: false,
-    currentRoundIndex: 0,
-    selectedRoundIndex: 0,
+    currentRoundIndex: -1,
+    selectedRoundIndex: -1,
     puzzles: [],
 };
 

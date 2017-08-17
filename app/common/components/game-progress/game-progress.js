@@ -19,7 +19,7 @@ function getMarkClasses(index, currentRoundIndex, isSelectable, selectedRoundInd
         classes['-current'] = true;
     }
 
-    if (isSelectable && Number.isFinite(selectedRoundIndex) && index === selectedRoundIndex) {
+    if (isSelectable && index === selectedRoundIndex) {
         classes['-selected'] = true;
     }
 
@@ -35,6 +35,10 @@ function getMarkText(index, currentRoundIndex) {
 }
 
 function getProgressFactor(currentRoundIndex, totalRounds) {
+    if (currentRoundIndex < 0) {
+        return 0;
+    }
+
     return currentRoundIndex / (totalRounds - 1);
 }
 

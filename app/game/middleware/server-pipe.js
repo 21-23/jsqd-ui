@@ -31,7 +31,7 @@ function formatStateMessage(message) {
             displayName,
         },
         session: {
-            currentRoundIndex: puzzleIndex,
+            currentRoundIndex: typeof puzzleIndex === 'number' ? puzzleIndex : -1,
             puzzleCount,
         },
     };

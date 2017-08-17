@@ -41,7 +41,7 @@ function formatStateMessage(message) {
             players,
         },
         session: {
-            currentRoundIndex: puzzleIndex,
+            currentRoundIndex: typeof puzzleIndex === 'number' ? puzzleIndex : -1,
             puzzleCount,
         }
     };
