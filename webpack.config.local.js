@@ -8,7 +8,7 @@ const baseConfig = require('./webpack.config.base.js');
 module.exports = function(env) {
     return webpackMerge(baseConfig, {
         output: {
-            path: path.resolve(__dirname, '../front-end-service/static'),
+            path: path.resolve(__dirname, '../front-end-service/static/_qd'),
             filename: '[name].js'
         },
         devtool: 'source-map',
