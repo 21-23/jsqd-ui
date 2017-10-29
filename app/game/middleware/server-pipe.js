@@ -25,7 +25,7 @@ function formatStateMessage(message) {
             countdownRemaining: startCountdown,
             remaining: roundCountdown,
             phase: roundPhase,
-            playerInput: message.solution.code,
+            playerInput: message.solution && message.solution.code,
         },
         participant: {
             displayName,
