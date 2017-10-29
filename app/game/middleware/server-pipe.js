@@ -17,7 +17,7 @@ const MESSAGE_NAME = ui.MESSAGE_NAME;
 
 function formatStateMessage(message) {
     const { roundCountdown, startCountdown, roundPhase, puzzle } = message;
-    const { puzzleIndex, puzzleCount, displayName, playerInput } = message;
+    const { puzzleIndex, puzzleCount, displayName } = message;
 
     return {
         round: {
@@ -25,7 +25,7 @@ function formatStateMessage(message) {
             countdownRemaining: startCountdown,
             remaining: roundCountdown,
             phase: roundPhase,
-            playerInput,
+            playerInput: message.solution.code,
         },
         participant: {
             displayName,
@@ -49,7 +49,7 @@ function getAction(message) {
         case MESSAGE_NAME.puzzleChanged:
             return RoundActionsCreator.updateCurrentRound({
                 index: message.puzzleIndex,
-                duration: message.timeLimit,
+                duration: message.puzzleOptions.timeLimit,
                 name: message.puzzleName,
             });
         case MESSAGE_NAME.roundPhaseChanged:

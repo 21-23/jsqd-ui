@@ -72,7 +72,7 @@ function getAction(message) {
         case MESSAGE_NAME.puzzleChanged:
             return updateCurrentRound({
                 index: message.puzzleIndex,
-                duration: message.timeLimit,
+                duration: message.puzzleOptions.timeLimit,
                 name: message.puzzleName,
             });
         case MESSAGE_NAME.puzzle:

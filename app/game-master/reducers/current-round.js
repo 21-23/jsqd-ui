@@ -67,7 +67,7 @@ function updateRoundState(state, roundState) {
 
     if (roundState.puzzle) {
         round.name = roundState.puzzle.name || defaultState.name;
-        round.duration = roundState.puzzle.timeLimit || defaultState.duration;
+        round.duration = roundState.puzzle.options.timeLimit || defaultState.duration;
         round.input = roundState.puzzle.input || defaultState.input;
         round.expected = roundState.puzzle.expected || defaultState.expected;
     }
