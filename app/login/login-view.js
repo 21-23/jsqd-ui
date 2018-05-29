@@ -10,7 +10,7 @@ render((
     <div className="login-view">
         <LoginPanel>
             <LoginButton type="github" path="/auth/github" icon="&#xf09b;" />
-            <LoginButton type="facebook" path="/auth/facebook" icon="&#xf09a;" />
+            {/* <LoginButton type="facebook" path="/auth/facebook" icon="&#xf09a;" /> */}
             <LoginButton type="twitter" path="/auth/twitter" icon="&#xf099;" />
             <LoginButton type="google" path="/auth/google" icon="&#xf0d5;" />
             <LoginButton type="qd-auto" path="/auth/qd-auto" icon="&#xf1c0;" />
