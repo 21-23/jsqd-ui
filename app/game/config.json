@@ -4,6 +4,6 @@
         "timeout": 500
     },
     "user-input": {
-        "limit": 512
+        "limit": 2048
     }
 }
