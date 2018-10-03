@@ -90,7 +90,7 @@ module.exports = {
             persistentCache: true,
             inject: true,
             background: '#fff',
-            title: 'Lodash Quick Draw',
+            title: 'JS Quick Draw',
             icons: {
                 android: true,
                 appleIcon: true,

@@ -12,7 +12,7 @@ function getLogoClass(role) {
 export default function UserPanel({ role, displayName }) {
     return (
         <div className="user-panel">
-            <div className="logo">Lodash Quick Draw</div>
+            <div className="logo">JS Quick Draw</div>
             <div className="user-info">
                 <span className={getLogoClass(role)}></span>
                 <span className="user-info-name">{displayName}</span>
