@@ -11,6 +11,7 @@ import { updateConnectionStatus } from '../action-creators/connection';
 import { addNewParticipant, removeParticipant } from '../action-creators/participant';
 import {
     updateParticipantSolution,
+    syncSolutions,
     updateRemaining,
     updateCurrentRound,
     updatePuzzle,
@@ -67,6 +68,8 @@ function getAction(message) {
                 length: message.length,
                 correct: message.correct,
             });
+        case MESSAGE_NAME.solutionSync:
+            return syncSolutions(message.solutions);
         case MESSAGE_NAME.roundCountdownChanged:
             return updateRemaining(message.roundCountdown);
         case MESSAGE_NAME.puzzleChanged:

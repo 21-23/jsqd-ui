@@ -2,7 +2,7 @@ import {
     PARTICIPANT_JOINED,
     PARTICIPANT_LEFT,
 } from '../actions/participant';
-import { PARTICIPANT_SOLUTION, ROUND_PHASE } from '../actions/round';
+import { PARTICIPANT_SOLUTION, ROUND_PHASE, SOLUTIONS_SYNC } from '../actions/round';
 import { SESSION_STATE } from '../actions/session';
 import { SCORE } from '../actions/score';
 
@@ -78,6 +78,23 @@ function updateParticipantRoundScore(state, participantData) {
     });
 }
 
+function syncSolutions(state, solutions) {
+    if (!solutions) {
+        return state;
+    }
+
+    return Object.assign({}, state, {
+        round: state.round.map((participant) => {
+            const solution = solutions[participant.participantId];
+            if (solution) {
+                return Object.assign({}, participant, solution);
+            }
+
+            return participant;
+        })
+    });
+}
+
 function cleanRoundScores(state) {
     const cleanRoundScore = score => Object.assign({}, score, defaultParticipant);
 
@@ -108,6 +125,8 @@ export default function score(state = defaultState, action) {
             return removeParticipant(state, action.payload.participantId);
         case PARTICIPANT_SOLUTION:
             return updateParticipantRoundScore(state, action.payload);
+        case SOLUTIONS_SYNC:
+            return syncSolutions(state, action.payload);
         case ROUND_PHASE:
             return updateRoundPhase(state, action.payload);
         case SCORE:

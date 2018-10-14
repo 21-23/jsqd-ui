@@ -13,3 +13,4 @@ export const startRound = createAction(RoundActions.START_ROUND);
 export const stopRound = createAction(RoundActions.STOP_ROUND);
 
 export const updateParticipantSolution = createAction(RoundActions.PARTICIPANT_SOLUTION);
+export const syncSolutions = createAction(RoundActions.SOLUTIONS_SYNC);
