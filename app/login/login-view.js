@@ -13,7 +13,7 @@ render((
             {/* <LoginButton type="facebook" path="/auth/facebook" icon="&#xf09a;" /> */}
             {/* <LoginButton type="twitter" path="/auth/twitter" icon="&#xf099;" /> */}
             {/* <LoginButton type="google" path="/auth/google" icon="&#xf0d5;" /> */}
-            {/* <LoginButton type="qdauto" path="/auth/qdauto" icon="&#xf1c0;" /> */}
+            <LoginButton type="qdauto" path="/auth/qdauto" icon="&#xf1c0;" />
         </LoginPanel>
     </div>
 ), document.body);
