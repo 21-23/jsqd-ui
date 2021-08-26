@@ -1,6 +1,6 @@
 {
     "server-endpoint": {
-        "uri": "${protocol}//${hostname}:3001/",
+        "uri": "${protocol}//${hostname}/ws",
         "timeout": 500
     }
 }
