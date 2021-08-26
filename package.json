@@ -1,6 +1,6 @@
 {
   "name": "jsqd-ui",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "main": "app/index.js",
   "license": "LGPL-3.0",
   "private": true,
